@@ -18,7 +18,9 @@ int main(int argc, char* argv[])
         ("h,head", "Specify head character", cxxopts::value<char>())
         ("t,tail", "Specify tail character", cxxopts::value<char>())
         ("r,ring", "Permit word ring")
+        ("filename", "Filename as-is", cxxopts::value<std::string>())
         ;
+    options.parse_positional({ "file-name" });
 
     //parse arguments
     auto result = options.parse(argc, argv);
@@ -29,7 +31,9 @@ int main(int argc, char* argv[])
     std::cout << result.count("w") << std::endl;
     std::cout << result["w"].as<bool>() << std::endl;
     std::cout << result["c"].as<bool>() << std::endl;
-    std::cout << result["h"].as<char>() << std::endl;
+    //std::cout << result["h"].as<char>() << std::endl;
+    std::cout << result.count("file-name") << std::endl;
+    std::cout << result["file-name"].as<std::string>() << std::endl;
 
     /*
         Òì³£°üÀ¨£º
