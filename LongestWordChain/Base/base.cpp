@@ -21,3 +21,23 @@ base::base()
 base::~base()
 {
 }
+
+int base::parse_arguments(std::string * filename, char * head, char * tail, bool * enable_loop)
+{
+    try
+    {
+        if (filename == nullptr)
+            return -1;
+
+
+    }
+    catch (...)
+    {
+
+    }
+}
+
+char ** base::read_file(std::string filename)
+{
+    return nullptr;
+}

@@ -28,6 +28,8 @@ private:
 
     int topological_sort();
 
+    int char_to_int(char ch);
+
 
 
 
