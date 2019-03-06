@@ -1,5 +1,11 @@
 #pragma once
 #include "cxxopts.hpp"
+#include <vector>
+#include <cctype>
+
+
+#define MAX_WORD 10010
+#define MAX_WORD_LENGTH 2048
 
 
 class base

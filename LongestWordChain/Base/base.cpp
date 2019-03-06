@@ -27,7 +27,13 @@ int base::parse_arguments(std::string * filename, char * head, char * tail, bool
     try
     {
         if (filename == nullptr)
+        {
             return -1;
+        }
+        else
+        {
+            return 0;
+        }
 
 
     }
@@ -39,5 +45,41 @@ int base::parse_arguments(std::string * filename, char * head, char * tail, bool
 
 char ** base::read_file(std::string filename)
 {
-    return nullptr;
+    std::vector<std::string> strings;
+    char* words[MAX_WORD];
+    char word_buffer[MAX_WORD_LENGTH];
+    if (FILE *file = fopen(filename.c_str(), "r")) {
+        // opened, split words into a char*[]
+        char ch;
+        int char_count = 0;
+        do 
+        {
+            ch = fgetc(file);
+            if (!isalpha((int)ch))
+            {
+                if (char_count > 0)
+                {
+                    word_buffer[char_count] = '\0';
+                    std::string str(word_buffer);
+                    strings.push_back(str);
+                    char_count = 0;
+                }
+                else
+                    continue;
+            }
+            else
+            {
+                word_buffer[char_count] = ch;
+                char_count++;
+            }
+        } while (!feof(file));
+
+        //TODO transfer strings(vector) to words(char**)
+
+        return words;
+    }
+    else {
+        // FILE not exist
+        return nullptr;
+    }
 }
