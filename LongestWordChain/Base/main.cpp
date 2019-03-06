@@ -3,24 +3,10 @@
 #include "cxxopts.hpp"
 
 
-
-
 int main(int argc, char* argv[])
 {
     
-    // Use cxxopts library for argument parsing, this is a lightweight header file library
-    // repo: https://github.com/jarro2783/cxxopts
-    
-    cxxopts::Options options("LongestWordChain", "Find the longest word chain in a text file.");
-    options.add_options()
-        ("w,by-word", "By maximum words")
-        ("c,by-char", "By maximum chars")
-        ("h,head", "Specify head character", cxxopts::value<char>())
-        ("t,tail", "Specify tail character", cxxopts::value<char>())
-        ("r,ring", "Permit word ring")
-        ("filename", "Filename as-is", cxxopts::value<std::string>())
-        ;
-    options.parse_positional({ "file-name" });
+
 
     //parse arguments
     auto result = options.parse(argc, argv);
@@ -31,7 +17,7 @@ int main(int argc, char* argv[])
     std::cout << result.count("w") << std::endl;
     std::cout << result["w"].as<bool>() << std::endl;
     std::cout << result["c"].as<bool>() << std::endl;
-    //std::cout << result["h"].as<char>() << std::endl;
+    std::cout << result["h"].as<char>() << std::endl;
     std::cout << result.count("file-name") << std::endl;
     std::cout << result["file-name"].as<std::string>() << std::endl;
 
@@ -44,6 +30,9 @@ int main(int argc, char* argv[])
         5. h和t的参数不是单个字符，或不是字母（a-z A-Z)
         6. 最终没有输入文件名，或输入了多个文件名
     */
+
+    //TODO pass processed arguments to Core and wait for results :)
+
 
     return 0;
 }
