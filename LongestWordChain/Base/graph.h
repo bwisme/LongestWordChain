@@ -5,6 +5,13 @@
 #define MAX_NODE 36
 
 
+typedef struct edge
+{
+    int from;
+    int to;
+    int weight;
+} edge;
+
 class graph
 {
 public:
@@ -35,12 +42,7 @@ private:
 
 };
 
-typedef struct edge 
-{
-    int from;
-    int to;
-    int weight; 
-} edge;
+
 
 graph::graph()
 {

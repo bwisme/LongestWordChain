@@ -8,18 +8,18 @@ int main(int argc, char* argv[])
     
 
 
-    //parse arguments
-    auto result = options.parse(argc, argv);
+    ////parse arguments
+    //auto result = options.parse(argc, argv);
 
-    //example of retriving results
-    // TODO handle exceptions
+    ////example of retriving results
+    //// TODO handle exceptions
    
-    std::cout << result.count("w") << std::endl;
-    std::cout << result["w"].as<bool>() << std::endl;
-    std::cout << result["c"].as<bool>() << std::endl;
-    std::cout << result["h"].as<char>() << std::endl;
-    std::cout << result.count("file-name") << std::endl;
-    std::cout << result["file-name"].as<std::string>() << std::endl;
+    //std::cout << result.count("w") << std::endl;
+    //std::cout << result["w"].as<bool>() << std::endl;
+    //std::cout << result["c"].as<bool>() << std::endl;
+    //std::cout << result["h"].as<char>() << std::endl;
+    //std::cout << result.count("file-name") << std::endl;
+    //std::cout << result["file-name"].as<std::string>() << std::endl;
 
     /*
         Òì³£°üÀ¨£º

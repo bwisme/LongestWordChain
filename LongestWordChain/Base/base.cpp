@@ -46,6 +46,7 @@ int base::parse_arguments(std::string * filename, char * head, char * tail, bool
 char ** base::read_file(std::string filename)
 {
     std::vector<std::string> strings;
+    // TODO judge duplicate
     char* words[MAX_WORD];
     char word_buffer[MAX_WORD_LENGTH];
     if (FILE *file = fopen(filename.c_str(), "r")) {
