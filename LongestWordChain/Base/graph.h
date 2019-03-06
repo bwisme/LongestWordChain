@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstring>
 #include <vector>
 #define MAX_EDGE 10010
 #define MAX_NODE 36
@@ -21,16 +22,23 @@ public:
 
 private:
 
-    int edge_count = 0;
+    int edge_count;
+    
+    void init();
+    
+    void add_edges(int from, int to, int w);
 
-
-    void add_edges();
-
-    int topological_sort();
+    bool dfs(int u);
+    
+    bool topological_sort();
+    
+    int id[MAX_NODE];
+    
+    bool vis[MAX_NODE];
 
     int char_to_int(char ch);
 
-
+    
 
 
 };
