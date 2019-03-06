@@ -1,5 +1,7 @@
 #include "graph.h"
-graph::graph() {}
+graph::graph() {
+    init();
+}
 
 void graph::init() {
     edge_count = 0;
@@ -11,14 +13,14 @@ void graph::init() {
     topo_result.clear();
 }
 
-int char_to_int(char ch) {
+int graph::char_to_int(char ch) {
     return ch - 'a';
 }
 
-void graph::add_edges(int from, int to, int w){
+void graph::add_edges(int from, int to, int w, char* word){
     next[++ edge_count] = head[from];
     head[from] = edge_count];
-    edges[cnt] = (edge){from, to, w};
+    edges[cnt] = (edge){from, to, w, word};
     vis[from] = vis[to] = true;
 }
 

@@ -12,7 +12,6 @@ public:
     graph();
     ~graph();
 
-    graph(char* words[]);
 
     int head[MAX_NODE];
     int next[MAX_EDGE];
@@ -26,7 +25,7 @@ private:
     
     void init();
     
-    void add_edges(int from, int to, int w);
+    void add_edges(int from, int to, int w, char* word);
 
     bool dfs(int u);
     
@@ -47,7 +46,8 @@ typedef struct edge
 {
     int from;
     int to;
-    int weight; 
+    int weight;
+    char* word;
 } edge;
 
 graph::graph()
