@@ -5,6 +5,7 @@ graph::graph() {
 
 void graph::init() {
     edge_count = 0;
+    slef_loop = false;
     memset(id, sizeof(id), 0);
     memset(vis, 0, sizeof(vis));
     memset(head, 0, sizeof(head));
@@ -18,8 +19,13 @@ int graph::char_to_int(char ch) {
 }
 
 void graph::add_edges(int from, int to, int w, char* word){
-    next[++ edge_count] = head[from];
-    head[from] = edge_count];
+    if (from == to) {
+        self_loop_edges[from].push_back(++ edge_count);
+        if (self_loop_edges[from].size() > 1) self_loop = true;
+    } else {
+        next[++ edge_count] = head[from];
+        head[from] = edge_count;
+    }
     edges[cnt] = (edge){from, to, w, word};
     vis[from] = vis[to] = true;
 }
@@ -36,6 +42,8 @@ bool graph::dfs(int u) {
 }
 
 bool graph::topological_sort(){
+    if (self_loop) return false;
+    
     for(int u = 0; u < MAX_NODE; u ++) if(vis[u] && !id[u])
         if(!dfs(u)) return false;
     reverse(topo_result.begin(), topo_result.end());

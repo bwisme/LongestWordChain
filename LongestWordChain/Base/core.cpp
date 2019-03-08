@@ -78,29 +78,39 @@ int core::get_ans(char* result[]){
     return ans;
 }
 
+int core::error(int err_no) {
+    
+    
+    return err_no;
+}
 
-int core::gen_chain_word(char* words[], int len, char* result[], char head, char tail, bool enable_loop) {
-    make_graph(words, len, WORD);
+int core::main_func(char* words[], int len, char* result[], char head, char tail, bool enable_loop, int cal_mod) {
+    make_graph(words, len, cal_mod);
     
     init_dp(head, tail, enable_loop);
     
-    word_graph -> topological_sort();
+    bool ok = word_graph -> topological_sort();
+    int ans = 0;
+    if (!ok) {
+        if (enable_loop) {
+            //需要思考的算法
+            //有向有环图求最长简单路径
+            
+        } else {
+            ans = error(HAS_LOOP);
+        }
+    } else {
+        get_dp_result();
+        ans = get_ans(result);
+    }
     
-    get_dp_result();
-    
-    int ans = get_ans(result);
     return ans;
 }
 
+int core::gen_chain_word(char* words[], int len, char* result[], char head, char tail, bool enable_loop) {
+    return main_func(words, len, result, head, tail, enable_loop, WORD);
+}
+
 int core::gen_chain_char(char* words[], int len, char* result[], char head, char tail, bool enable_loop) {
-    make_graph(words, len, CHAR);
-    
-    init_dp(head, tail, enable_loop);
-    
-    word_graph -> topological_sort();
-    
-    get_dp_result();
-    
-    int ans = get_ans(result);
-    return ans;
+    return main_func(words, len, result, head, tail, enable_loop, CHAR);
 }

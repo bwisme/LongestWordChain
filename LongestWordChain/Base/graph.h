@@ -17,6 +17,10 @@ public:
     int next[MAX_EDGE];
     edge edges[MAX_EDGE];
 
+    bool self_loop; //是否有自环
+    //记录的是从每个点出发的所有自环中的边
+    vector< vector<int> > self_loop_edges(MAX_NODE, vector<int>());
+    
     std::vector<int> topo_result;
 
 private:
