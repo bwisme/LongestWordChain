@@ -2,6 +2,7 @@
 #include "cxxopts.hpp"
 #include <vector>
 #include <cctype>
+#include <cstdio>
 
 
 #define MAX_WORD 10010

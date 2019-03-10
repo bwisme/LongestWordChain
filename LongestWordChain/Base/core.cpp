@@ -31,20 +31,20 @@ void core::init_dp(char head, char tail, bool enable_loop) {
 void core::make_graph(char* words[], int len, int cal_mod) {
     for (int i = 0; i < len; i ++) {
         int from, to, w, word_length;
-        word_length = strlen(words[i]);
+        word_length = (int)strlen(words[i]);
         from = char_to_int(words[i][0]);
         to = char_to_int(words[i][word_length - 1]);
         
         if (cal_mod == WORD) w = 1;
         else w = word_length;
         
-        word_graph.add_edges(from, to, w, words[i]);
+        word_graph->add_edges(from, to, w, words[i]);
     }
     
 }
 
 void core::get_dp_result() {
-    for (int i = word_graph -> topo_result.size() - 1; i >= 0; i --) {
+    for (int i = (int) word_graph -> topo_result.size() - 1; i >= 0; i --) {
         int u = word_graph -> topo_result.at(i);
         for (int j = word_graph -> head[u]; j; j = word_graph -> next[j]) {
             int v = word_graph -> edges[j].to;

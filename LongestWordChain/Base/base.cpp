@@ -1,5 +1,4 @@
 #include "base.h"
-
 base::base()
 {
     // Use cxxopts library for argument parsing, this is a lightweight header file library
@@ -49,8 +48,10 @@ char ** base::read_file(std::string filename)
     // TODO judge duplicate
     char* words[MAX_WORD];
     char word_buffer[MAX_WORD_LENGTH];
-    if (FILE *file = fopen(filename.c_str(), "r")) {
-        // opened, split words into a char*[]
+    FILE* file;
+    errno_t err;
+    if ((err = fopen_s(&file, filename.c_str(), "r")) == 0) {
+        // opened, split words into a vector<string>
         char ch;
         int char_count = 0;
         do 
@@ -80,7 +81,7 @@ char ** base::read_file(std::string filename)
         return words;
     }
     else {
-        // FILE not exist
+        // FILE reading error
         return nullptr;
     }
 }
