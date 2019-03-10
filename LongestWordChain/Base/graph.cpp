@@ -3,6 +3,8 @@ graph::graph() {
     init();
 }
 
+graph::~graph() {}
+
 void graph::init() {
     edge_count = 0;
     memset(id, sizeof(id), 0);
@@ -19,8 +21,8 @@ int graph::char_to_int(char ch) {
 
 void graph::add_edges(int from, int to, int w, char* word){
     next[++ edge_count] = head[from];
-    head[from] = edge_count];
-    edges[cnt] = (edge){from, to, w, word};
+    head[from] = edge_count;
+    //edges[cnt] = (edge){from, to, w, word};
     vis[from] = vis[to] = true;
 }
 

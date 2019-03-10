@@ -65,7 +65,7 @@ int core::get_ans(char* result[]){
             from = i;
         }
     } else if (mod == HEAD || mod == HEAD_TAIL) {
-        from = char_to_int(head);
+        from = char_to_int(mod); //bugfix: head -> mod
         ans = dp_result[from];
     }
     

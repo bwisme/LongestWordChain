@@ -53,10 +53,4 @@ private:
 };
 
 
-graph::graph()
-{
-}
 
-graph::~graph()
-{
-}

@@ -13,8 +13,8 @@ namespace BaseTest
 		{
 			// TODO: 在此输入测试代码
             base b;
-            char** words = b.read_file("a.txt");
-            Assert::IsNull(words);
+            int res = b.read_file("a.txt");
+            Assert::AreEqual(res, 0);
 		}
 
 	};

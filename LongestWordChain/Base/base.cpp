@@ -42,11 +42,11 @@ int base::parse_arguments(std::string * filename, char * head, char * tail, bool
     }
 }
 
-char ** base::read_file(std::string filename)
+int base::read_file(std::string filename)
 {
     std::vector<std::string> strings;
     // TODO judge duplicate
-    char* words[MAX_WORD];
+    //char* words[MAX_WORD];
     char word_buffer[MAX_WORD_LENGTH];
     FILE* file;
     errno_t err;
@@ -76,12 +76,15 @@ char ** base::read_file(std::string filename)
             }
         } while (!feof(file));
 
-        //TODO transfer strings(vector) to words(char**)
+        // transfer strings(vector) to words(char**)
 
-        return words;
+        for (auto& string : strings)
+            this->inputs.push_back(&string.front());
+
+        return 0;
     }
     else {
         // FILE reading error
-        return nullptr;
+        return err;
     }
 }
