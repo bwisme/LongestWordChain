@@ -56,7 +56,7 @@ bool graph::topological_sort(){
 
 
 
-int graph::force_dfs(char* result, int head, int tail) {
+int graph::force_dfs(char* result[], int head, int tail) {
     
     
     return 0;

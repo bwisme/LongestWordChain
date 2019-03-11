@@ -49,7 +49,7 @@ public:
 
     int char_to_int(char ch);
 
-    int force_dfs(char* result, int head, int tail);
+    int force_dfs(char* result[], int head, int tail);
 
 private:
 
