@@ -48,25 +48,36 @@ void core::get_dp_result() {
         int u = word_graph -> topo_result.at(i);
         for (int j = word_graph -> head[u]; j; j = word_graph -> next[j]) {
             int v = word_graph -> edges[j].to;
-            int tmp = dp_result[v] + word_graph -> edges[j].weight;
-            if (tmp > dp_result[u]) {
-                dp_result[u] = tmp;
+            int dp_result_v = dp_result[v] + word_graph -> edges[j].weight +
+                word_graph -> edges[word_graph -> self_loop_edges[v][0]].w;
+            int dp_result_u = dp_result[u] + word_graph -> edges[word_graph -> self_loop_edges[u][0]].w;
+            if (dp_result_v > dp_result_u) {
+                dp_result[u] = dp_result_v;
                 dp_next[u] = j;
             }
         }
     }
 }
 
-int core::get_ans(char* result[]){
+int core::get_ans_loop(char* result[], int head, int tail) {
+    return word_graph -> force_dfs(result, head, tail)
+}
+
+int core::get_ans(char* result[], int head, int tail){
+    get_dp_result();
     int ans = 0, from;
     if (mod == ORD || mod == TAIL) {
-        for (int i = 0; i < MAX_NODE; i ++) if (dp_result[i] > ans) {
-            ans = dp_result[i];
-            from = i;
+        for (int i = 0; i < MAX_NODE; i ++) {
+            int dp_result_i = dp_result[i] + word_graph -> edges[word_graph -> self_loop_edges[i][0]].w;
+            if (dp_result_i > ans) {
+                ans = dp_result_i;
+                from = i;
+            }
         }
     } else if (mod == HEAD || mod == HEAD_TAIL) {
-        from = char_to_int(this->head); //bugfix: head -> this->head
-        ans = dp_result[from];
+        //from = char_to_int(mod); //bugfix: head -> mod
+        from = head;
+        ans = dp_result[from] + word_graph -> edges[word_graph -> self_loop_edges[from][0]].w;
     }
     
     int node = from, cnt = 0;
@@ -107,13 +118,12 @@ int core::main_func(char* words[], int len, char* result[], char head, char tail
         if (enable_loop) {
             //需要思考的算法
             //有向有环图求最长简单路径
-            
+            ans = get_ans_loop(result, char_to_int(head), char_to_int(tail));
         } else {
             ans = error(HAS_LOOP);
         }
     } else {
-        get_dp_result();
-        ans = get_ans(result);
+        ans = get_ans(result, char_to_int(head), char_to_int(tail));
     }
     
     return ans;

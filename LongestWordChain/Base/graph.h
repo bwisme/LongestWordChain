@@ -43,10 +43,13 @@ public:
 
     int id[MAX_NODE];
 
-    bool vis[MAX_NODE];
+    bool vis_node[MAX_NODE];
+    
+    bool vis_edge[MAX_EDGE];
 
     int char_to_int(char ch);
 
+    int force_dfs(char* result, int head, int tail);
 
 private:
 
