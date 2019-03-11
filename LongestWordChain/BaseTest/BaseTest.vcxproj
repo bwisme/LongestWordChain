@@ -114,7 +114,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>../Base/Debug/base.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>../Base/Debug/base.obj;../Base/Debug/core.obj;../Base/Debug/graph.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -158,13 +158,14 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="core_test.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="unittest1.cpp" />
+    <ClCompile Include="base_test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Base\Base.vcxproj">

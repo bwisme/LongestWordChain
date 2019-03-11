@@ -75,16 +75,34 @@ int core::get_ans(char* result[], int head, int tail){
             }
         }
     } else if (mod == HEAD || mod == HEAD_TAIL) {
+<<<<<<< HEAD
         //from = char_to_int(mod); //bugfix: head -> mod
         from = head;
         ans = dp_result[from] + word_graph -> edges[word_graph -> self_loop_edges[from][0]].w;
+=======
+        from = char_to_int(this->head); //bugfix: head -> this->head
+        ans = dp_result[from];
+>>>>>>> 9876cbf09a82aed0a75053109151e359dc26ebb3
     }
     
     int node = from, cnt = 0;
     while (dp_next[node]) {
+<<<<<<< HEAD
         if (word_graph -> self_loop_edges[node][0].size() > 0) {
             result[cnt ++] = word_graph -> edges[word_graph -> self_loop_edges[node][0]].word;
         }
+=======
+        // if node has self loops, these words must be included
+        // TODO >= 1 or == 1 ??
+        if (word_graph->self_loop_edges[node].size() >= 1)
+        {
+            for (auto self_loop : word_graph->self_loop_edges[node])
+            {
+                result[cnt++] = word_graph->edges[self_loop].word;
+            }
+        }
+        // normal results
+>>>>>>> 9876cbf09a82aed0a75053109151e359dc26ebb3
         result[cnt ++] = word_graph -> edges[dp_next[node]].word;
         node = word_graph -> edges[dp_next[node]].to;
     }
@@ -99,6 +117,8 @@ int core::error(int err_no) {
 }
 
 int core::main_func(char* words[], int len, char* result[], char head, char tail, bool enable_loop, int cal_mod) {
+    this->head = head;
+    this->tail = tail;
     make_graph(words, len, cal_mod);
     
     init_dp(head, tail, enable_loop);
