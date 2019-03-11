@@ -28,11 +28,12 @@ public:
     char** argv;
 
     int read_file(std::string filename); //read words into inputs
+    int parse_arguments(std::string* filename, char* head, char* tail, bool* enable_loop);
 
 private:
     cxxopts::Options options = cxxopts::Options("LongestWordChain", "Find the longest word chain in a text file.");
 
-    int parse_arguments(std::string* filename, char* head, char* tail, bool* enable_loop);
+    
     
 
 
