@@ -83,6 +83,7 @@ void graph::search_longest_path(std::vector<int> &edge_record, int u, int ans, i
         vis_edge[j] = true;
         edge_record.push_back(j);
         search_longest_path(edge_record, edges[j].to, ans + edges[j].weight, tail);
+        edge_record.pop_back();
         vis_edge[j] = false;
     }
     if (!is_node(tail) && !flag) { //没有指定终点且没边可走
@@ -91,7 +92,7 @@ void graph::search_longest_path(std::vector<int> &edge_record, int u, int ans, i
             loop_result.assign(edge_record.begin(), edge_record.end());
         }
     }
-    if (!flag) edge_record.pop_back();
+    //if (!flag && !edge_record.empty()) edge_record.pop_back();
 }
 
 int graph::force_dfs(char* result[], int head, int tail) {
