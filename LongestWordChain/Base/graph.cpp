@@ -10,7 +10,8 @@ void graph::init() {
     std::vector< std::vector<int> > self_loop_edges(MAX_NODE, std::vector<int>());
     self_loop = false;
     memset(id, sizeof(id), 0);
-    memset(vis, 0, sizeof(vis));
+    memset(vis_node, 0, sizeof(vis_node));
+    memset(vis_edge, 0, sizeof(vis_edge));
     memset(head, 0, sizeof(head));
     memset(next, 0, sizeof(next));
     memset(edges, 0, sizeof(next));
@@ -30,7 +31,7 @@ void graph::add_edges(int from, int to, int w, char* word){
         head[from] = edge_count;
     }
     edges[edge_count] = {from, to, w, word};
-    vis[from] = vis[to] = true;
+    vis_node[from] = vis_node[to] = true;
 }
 
 bool graph::dfs(int u) {
@@ -53,4 +54,11 @@ bool graph::topological_sort(){
     return true;
 }
 
+
+
+int graph::force_dfs(char* result, int head, int tail) {
+    
+    
+    return 0;
+}
 
