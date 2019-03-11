@@ -45,7 +45,7 @@ int base::parse_arguments(std::string * filename, char * head, char * tail, bool
 int base::read_file(std::string filename)
 {
     std::vector<std::string> strings;
-    // TODO judge duplicate
+
     //char* words[MAX_WORD];
     char word_buffer[MAX_WORD_LENGTH];
     FILE* file;
@@ -63,7 +63,7 @@ int base::read_file(std::string filename)
                 {
                     word_buffer[char_count] = '\0';
                     std::string str(word_buffer);
-                    strings.push_back(str);
+                    this->strings.push_back(str);
                     char_count = 0;
                 }
                 else
@@ -78,8 +78,10 @@ int base::read_file(std::string filename)
 
         // transfer strings(vector) to words(char**)
 
-        for (auto& string : strings)
-            this->inputs.push_back(&string.front());
+        for (const auto& string : this->strings)
+            this->inputs.push_back(string.c_str());
+
+        
 
         return 0;
     }

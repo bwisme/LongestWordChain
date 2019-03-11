@@ -19,7 +19,8 @@ public:
     
     //base(core* core_instance);
 
-    std::vector<char*> inputs; //input words, pass input.data() as char**
+    std::vector<const char*> inputs ; //input words, pass input.data() as char**
+    std::vector<std::string> strings;
     std::vector<char*> outputs; //results
 
     //core* core_instance; // call core apis
