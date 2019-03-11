@@ -20,9 +20,9 @@ int graph::char_to_int(char ch) {
 }
 
 void graph::add_edges(int from, int to, int w, char* word){
-    next[++ edge_count] = head[from];
+    next[++edge_count] = head[from];
     head[from] = edge_count;
-    //edges[cnt] = (edge){from, to, w, word};
+    edges[edge_count] = {from, to, w, word};
     vis[from] = vis[to] = true;
 }
 

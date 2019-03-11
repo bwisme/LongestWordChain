@@ -21,6 +21,13 @@ base::~base()
 {
 }
 
+base::base(core * core_instance, int argc, char** argv)
+{
+    this->core_instance = core_instance;
+    this->argc = argc;
+    this->argv = argv;
+}
+
 int base::parse_arguments(std::string * filename, char * head, char * tail, bool * enable_loop)
 {
     try
@@ -73,6 +80,7 @@ int base::read_file(std::string filename)
             {
                 word_buffer[char_count] = ch;
                 char_count++;
+
             }
         } while (!feof(file));
 
@@ -80,8 +88,6 @@ int base::read_file(std::string filename)
 
         for (const auto& string : this->strings)
             this->inputs.push_back(string.c_str());
-
-        
 
         return 0;
     }
