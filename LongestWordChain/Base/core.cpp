@@ -48,15 +48,19 @@ void core::get_dp_result() {
         int u = word_graph -> topo_result.at(i);
         for (int j = word_graph -> head[u]; j; j = word_graph -> next[j]) {
             int v = word_graph -> edges[j].to;
-            int dp_result_v = dp_result[v] + word_graph -> edges[j].weight +
-                word_graph -> edges[word_graph -> self_loop_edges[v][0]].weight;
-            int dp_result_u = dp_result[u] + word_graph -> edges[word_graph -> self_loop_edges[u][0]].weight;
+            int dp_result_v = dp_result[v] + word_graph -> edges[j].weight + get_first_self_loop_weight(v);
+            int dp_result_u = dp_result[u] + get_first_self_loop_weight(u);
             if (dp_result_v > dp_result_u) {
                 dp_result[u] = dp_result_v;
                 dp_next[u] = j;
             }
         }
     }
+}
+
+int core::get_first_self_loop_weight(int node)
+{
+    return word_graph->self_loop_edges[node].size() > 0 ? word_graph->edges[word_graph->self_loop_edges[node][0]].weight : 0;
 }
 
 int core::get_ans_loop(char* result[], int head, int tail) {
@@ -68,7 +72,7 @@ int core::get_ans(char* result[], int head, int tail){
     int ans = 0, from;
     if (mod == ORD || mod == TAIL) {
         for (int i = 0; i < MAX_NODE; i ++) {
-            int dp_result_i = dp_result[i] + word_graph -> edges[word_graph -> self_loop_edges[i][0]].weight;
+            int dp_result_i = dp_result[i] + get_first_self_loop_weight(i);
             if (dp_result_i > ans) {
                 ans = dp_result_i;
                 from = i;
@@ -77,7 +81,7 @@ int core::get_ans(char* result[], int head, int tail){
     } else if (mod == HEAD || mod == HEAD_TAIL) {
         //from = char_to_int(mod); //bugfix: head -> mod
         from = head;
-        ans = dp_result[from] + word_graph -> edges[word_graph -> self_loop_edges[from][0]].weight;
+        ans = dp_result[from] + get_first_self_loop_weight(from);
     }
     
     int node = from, cnt = 0;
