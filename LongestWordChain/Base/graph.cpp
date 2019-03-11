@@ -9,7 +9,7 @@ void graph::init() {
     edge_count = 0;
     self_loop_edges = std::vector<std::vector<int>>(MAX_NODE, std::vector<int>());
     self_loop = false;
-    memset(in_degree, sizeof(in_degree), 0);
+    memset(id, sizeof(id), 0);
     memset(vis_node, 0, sizeof(vis_node));
     memset(vis_edge, 0, sizeof(vis_edge));
     memset(head, 0, sizeof(head));
@@ -37,35 +37,25 @@ void graph::add_edges(int from, int to, int w, char* word){
 }
 
 bool graph::dfs(int u) {
-    in_degree[u] = -1;
+    id[u] = -1;
     for(int j = head[u]; j; j = next[j]) {
         int v = edges[j].to;
-        if(in_degree[v]<0) return false;
-        else if(!in_degree[v]) dfs(v);
+        if(id[v]<0) return false;
+		else if (!id[v]) {
+			bool ret = dfs(v);
+			if (!ret) return false;
+		}
     }
-    in_degree[u] = 1; topo_result.push_back(u);
+    id[u] = 1; topo_result.push_back(u);
     return true;
 }
 
 bool graph::topological_sort(){
-    if (self_loop) 
-        return false;
+    if (self_loop) return false;
     
-    //for (int u = 0; u < MAX_NODE; u++)
-    //{
-    //    if (vis_node[u] && !id[u])
-    //    {
-    //        if (!dfs(u))
-    //            return false;
-    //    }
-    //}
-    //reverse(topo_result.begin(), topo_result.end());
-    //return true;
-
-    // count in_degree
-
-    // 
-    
+    for(int u = 0; u < MAX_NODE; u ++) if(vis_node[u] && !id[u])
+        if(!dfs(u)) return false;
+    reverse(topo_result.begin(), topo_result.end());
     return true;
 }
 
