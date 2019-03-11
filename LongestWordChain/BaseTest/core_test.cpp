@@ -31,6 +31,7 @@ namespace BaseTest
             char* results[100];
             c.gen_chain_word(words, 11, results, 0, 0, false);
 
+
         }
 
 
