@@ -41,7 +41,10 @@ bool graph::dfs(int u) {
     for(int j = head[u]; j; j = next[j]) {
         int v = edges[j].to;
         if(id[v]<0) return false;
-        else if(!id[v]) dfs(v);
+		else if (!id[v]) {
+			bool ret = dfs(v);
+			if (!ret) return false;
+		}
     }
     id[u] = 1; topo_result.push_back(u);
     return true;
