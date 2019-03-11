@@ -65,7 +65,7 @@ int core::get_ans(char* result[]){
             from = i;
         }
     } else if (mod == HEAD || mod == HEAD_TAIL) {
-        from = char_to_int(mod); //bugfix: head -> mod
+        from = char_to_int(this->head); //bugfix: head -> this->head
         ans = dp_result[from];
     }
     
@@ -85,6 +85,8 @@ int core::error(int err_no) {
 }
 
 int core::main_func(char* words[], int len, char* result[], char head, char tail, bool enable_loop, int cal_mod) {
+    this->head = head;
+    this->tail = tail;
     make_graph(words, len, cal_mod);
     
     init_dp(head, tail, enable_loop);

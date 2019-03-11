@@ -7,7 +7,7 @@ graph::~graph() {}
 
 void graph::init() {
     edge_count = 0;
-    std::vector< std::vector<int> > self_loop_edges(MAX_NODE, std::vector<int>());
+    self_loop_edges = std::vector<std::vector<int>>(MAX_NODE, std::vector<int>());
     self_loop = false;
     memset(id, sizeof(id), 0);
     memset(vis, 0, sizeof(vis));
