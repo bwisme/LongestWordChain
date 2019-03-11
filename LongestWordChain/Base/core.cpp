@@ -49,8 +49,8 @@ void core::get_dp_result() {
         for (int j = word_graph -> head[u]; j; j = word_graph -> next[j]) {
             int v = word_graph -> edges[j].to;
             int dp_result_v = dp_result[v] + word_graph -> edges[j].weight +
-                word_graph -> edges[word_graph -> self_loop_edges[v][0]].w;
-            int dp_result_u = dp_result[u] + word_graph -> edges[word_graph -> self_loop_edges[u][0]].w;
+                word_graph -> edges[word_graph -> self_loop_edges[v][0]].weight;
+            int dp_result_u = dp_result[u] + word_graph -> edges[word_graph -> self_loop_edges[u][0]].weight;
             if (dp_result_v > dp_result_u) {
                 dp_result[u] = dp_result_v;
                 dp_next[u] = j;
@@ -60,7 +60,7 @@ void core::get_dp_result() {
 }
 
 int core::get_ans_loop(char* result[], int head, int tail) {
-    return word_graph -> force_dfs(result, head, tail)
+    return word_graph->force_dfs(result, head, tail);
 }
 
 int core::get_ans(char* result[], int head, int tail){
@@ -68,7 +68,7 @@ int core::get_ans(char* result[], int head, int tail){
     int ans = 0, from;
     if (mod == ORD || mod == TAIL) {
         for (int i = 0; i < MAX_NODE; i ++) {
-            int dp_result_i = dp_result[i] + word_graph -> edges[word_graph -> self_loop_edges[i][0]].w;
+            int dp_result_i = dp_result[i] + word_graph -> edges[word_graph -> self_loop_edges[i][0]].weight;
             if (dp_result_i > ans) {
                 ans = dp_result_i;
                 from = i;
@@ -77,7 +77,7 @@ int core::get_ans(char* result[], int head, int tail){
     } else if (mod == HEAD || mod == HEAD_TAIL) {
         //from = char_to_int(mod); //bugfix: head -> mod
         from = head;
-        ans = dp_result[from] + word_graph -> edges[word_graph -> self_loop_edges[from][0]].w;
+        ans = dp_result[from] + word_graph -> edges[word_graph -> self_loop_edges[from][0]].weight;
     }
     
     int node = from, cnt = 0;
