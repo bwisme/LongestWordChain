@@ -5,7 +5,8 @@ graph::graph() {
 
 void graph::init() {
     edge_count = 0;
-    slef_loop = false;
+    std::vector< std::vector<int> > self_loop_edges(MAX_NODE, std::vector<int>());
+    self_loop = false;
     memset(id, sizeof(id), 0);
     memset(vis, 0, sizeof(vis));
     memset(head, 0, sizeof(head));
@@ -26,7 +27,7 @@ void graph::add_edges(int from, int to, int w, char* word){
         next[++ edge_count] = head[from];
         head[from] = edge_count;
     }
-    edges[cnt] = (edge){from, to, w, word};
+    edges[edge_count] = {from, to, w, word};
     vis[from] = vis[to] = true;
 }
 

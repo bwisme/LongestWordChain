@@ -123,6 +123,7 @@
   <ItemGroup>
     <ClCompile Include="base.cpp" />
     <ClCompile Include="core.cpp" />
+    <ClCompile Include="graph.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

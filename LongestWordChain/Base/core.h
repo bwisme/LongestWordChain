@@ -30,7 +30,7 @@ private:
     int dp_result[MAX_NODE]; //dp的结果
     int dp_next[MAX_EDGE]; //dp过程中记录的每个点的下一条边
     void init_dp(char head, char tail, bool enable_loop); //计算前进行初始化
-    void make_graph(char* words[], len, int mod);
+    void make_graph(char* words[], int len, int mod);
     int char_to_int(char ch);
     void get_dp_result();
     int get_ans(char* result[]);
