@@ -36,7 +36,7 @@ public:
 
     int edge_count;
 
-    void init();
+    //void init();
 
     void add_edges(int from, int to, int w, char* word);
 
@@ -49,6 +49,8 @@ public:
     bool vis_node[MAX_NODE];
     
     bool vis_edge[MAX_EDGE];
+
+    bool vis_self_loop[MAX_NODE];
 
     int char_to_int(char ch);
     
