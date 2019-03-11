@@ -35,9 +35,27 @@ namespace BaseTest
             Assert::AreEqual(results[2], "elephant");
             Assert::AreEqual(results[3], "trick");
 
+        }
+        TEST_METHOD(GetChainCharTest2)
+        {
+            // test file exist
+            core c;
+            char* words[] =
+            {
+                "element",
+                "heaven",
+                "table",
+                "teach",
+                "talk"
+            };
+            char* results[100];
+            c.gen_chain_word(words, 5, results, 0, 0, true);
+            Assert::AreEqual(results[0], "table");
+            Assert::AreEqual(results[1], "element");
+            Assert::AreEqual(results[2], "teach");
+            Assert::AreEqual(results[3], "heaven");
 
         }
-
 
     };
 }

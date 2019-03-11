@@ -44,7 +44,7 @@ public:
 
     bool topological_sort();
 
-    int id[MAX_NODE];
+    int in_degree[MAX_NODE];
 
     bool vis_node[MAX_NODE];
     
