@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "core.h"
 #include <iostream>
 #include <set>
@@ -41,7 +42,7 @@ void core::make_graph(char* words[], int len, int cal_mod) {
         from = char_to_int(words[i][0]);
         to = char_to_int(words[i][word_length - 1]);
         
-        if (cal_mod == WORD) w = 1;
+        if (cal_mod == WORD_MODE) w = 1;
         else w = word_length;
         
         word_graph->add_edges(from, to, w, words[i]);
@@ -189,9 +190,9 @@ int core::common_interface(char* words[], int len, char* result[], char head, ch
 }
 
 int core::gen_chain_word(char* words[], int len, char* result[], char head, char tail, bool enable_loop) {
-    return common_interface(words, len, result, head, tail, enable_loop, WORD);
+    return common_interface(words, len, result, head, tail, enable_loop, WORD_MODE);
 }
 
 int core::gen_chain_char(char* words[], int len, char* result[], char head, char tail, bool enable_loop) {
-    return common_interface(words, len, result, head, tail, enable_loop, CHAR);
+    return common_interface(words, len, result, head, tail, enable_loop, CHAR_MODE);
 }

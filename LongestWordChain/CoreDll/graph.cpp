@@ -1,4 +1,6 @@
+#include "stdafx.h"
 #include "graph.h"
+
 graph::graph() {
     edge_count = 0;
     self_loop_edges = std::vector<std::vector<int>>(MAX_NODE, std::vector<int>());
