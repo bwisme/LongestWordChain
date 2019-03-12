@@ -1,19 +1,6 @@
 #include "base.h"
 base::base()
 {
-    // Use cxxopts library for argument parsing, this is a lightweight header file library
-    // repo: https://github.com/jarro2783/cxxopts
-
-    //cxxopts::Options options("LongestWordChain", "Find the longest word chain in a text file.");
-    options.add_options()
-        ("w,by-word", "By maximum words")
-        ("c,by-char", "By maximum chars")
-        ("h,head", "Specify head character", cxxopts::value<char>())
-        ("t,tail", "Specify tail character", cxxopts::value<char>())
-        ("r,ring", "Permit word ring")
-        ("filename", "Filename as-is", cxxopts::value<std::string>())
-        ;
-    options.parse_positional({ "file-name" });
 
 }
 
@@ -23,6 +10,20 @@ base::~base()
 
 base::base(core * core_instance, int argc, char** argv)
 {
+    // Use cxxopts library for argument parsing, this is a lightweight header file library
+    // repo: https://github.com/jarro2783/cxxopts
+    //cxxopts::Options options("LongestWordChain", "Find the longest word chain in a text file.");
+    options.add_options()
+        ("w,by-word", "By maximum words")
+        ("c,by-char", "By maximum chars")
+        ("h,head", "Specify head character", cxxopts::value<char>())
+        ("t,tail", "Specify tail character", cxxopts::value<char>())
+        ("r,ring", "Permit word ring")
+        ("filename", "Filename as-is", cxxopts::value<std::string>())
+        ;
+    options.parse_positional({ "filename" });
+
+    
     this->core_instance = core_instance;
     this->argc = argc;
     this->argv = argv;
@@ -102,6 +103,10 @@ int base::parse_arguments(std::string * filename, int * mode, char * head, char 
         {
             *enable_loop = false;
         }
+
+        //filename
+        *filename = result["filename"].as<std::string>();
+        return 0;
     }
     catch (const cxxopts::OptionException& e)
     {
