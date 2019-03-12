@@ -11,6 +11,7 @@ graph::graph() {
     memset(next, 0, sizeof(next));
     memset(edges, 0, sizeof(next));
     loop_ans = 0;
+	loop_len = 0;
 	memset(loop_result, 0, sizeof(loop_result));
     topo_result.clear();
 }

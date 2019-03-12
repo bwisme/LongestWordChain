@@ -105,7 +105,13 @@ int core::get_ans(char* result[], int head, int tail){
         result[cnt ++] = word_graph -> edges[dp_next[node]].word;
         node = word_graph -> edges[dp_next[node]].to;
     }
-    
+	if (word_graph->self_loop_edges[node].size() >= 1 && cnt > 0)
+	{
+		for (auto self_loop : word_graph->self_loop_edges[node])
+		{
+			result[cnt++] = word_graph->edges[self_loop].word;
+		}
+	}
     //return ans;
 	return cnt;
 }
