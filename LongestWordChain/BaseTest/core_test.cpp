@@ -78,6 +78,95 @@ namespace BaseTest
             Assert::AreEqual(results[5], "heaven");
 
         }
+        TEST_METHOD(GetChainCharTest4)
+        {
+            // test file exist
+            core c;
+            char* words[] =
+            {
+                "aab",
+                "bac",
+                "cad",
+                "dae",
+                "eaf",
+                "fag",
+                "gah",
+                "hai",
+                "iaj",
+                "jak",
+                "kaa",
+                "oar",
+                "rat",
+                "qaz"
+            };
+            char* results[100];
+            int len = c.gen_chain_word(words, 14, results, 0, 0, true);
+            Assert::AreEqual(11, len);
+
+        }
+        TEST_METHOD(GetChainCharTest5)
+        {
+            // test file exist
+            core c;
+            char* words[] =
+            {
+"aab",
+"bac",
+"cad",
+"dae",
+"eaa",
+"aab",
+"bac",
+"cad",
+"dae",
+"eaf",
+"fag",
+"gah",
+"hai",
+"iaj",
+"jak",
+"kal",
+"lam",
+"man",
+"nao",
+"oap",
+"paq",
+"qag",
+"gah",
+"hai",
+"iaj",
+"jak",
+"kal",
+"lam",
+"man",
+"nao",
+"oap",
+"paq",
+"qar",
+"ras",
+"sat",
+"tau",
+"uav",
+"vaw",
+"wax",
+"xay",
+"yaz",
+"zar",
+"raa",
+"gar"
+
+            };
+            char* results[100];
+            char* results2[100];
+            int len = c.gen_chain_word(words, 44, results, 0, 'a', true);
+            //int len2 = c.gen_chain_char(words, 44, results2, 0, 0, true);
+            Assert::AreEqual(43, len);
+            //Assert::AreEqual(129, len2);
+
+        }
+
+
+
 
     };
 }

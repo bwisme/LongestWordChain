@@ -73,7 +73,8 @@ void graph::search_longest_path(std::vector<int> &edge_record, int u, int ans, i
         vis_self_loop[u] = true;
     }
     if (u == tail) { //指定了结尾且当前就为结尾节点
-        if (ans > loop_ans) {
+        if (ans > loop_ans && edge_record.size() > 1) {
+            // edge_record 需要有两个以上的边
             loop_ans = ans;
             loop_result.assign(edge_record.begin(), edge_record.end());
         }
@@ -89,7 +90,7 @@ void graph::search_longest_path(std::vector<int> &edge_record, int u, int ans, i
         vis_edge[j] = false;
     }
     if (!is_node(tail) && !flag) { //没有指定终点且没边可走
-        if (ans > loop_ans) {
+        if (ans > loop_ans && edge_record.size() > 1) {
             loop_ans = ans;
             loop_result.assign(edge_record.begin(), edge_record.end());
         }
