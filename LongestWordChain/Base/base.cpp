@@ -6,6 +6,7 @@ base::base()
 
 base::~base()
 {
+	solution.close();
 }
 
 base::base(core * core_instance, int argc, char** argv)
@@ -27,6 +28,7 @@ base::base(core * core_instance, int argc, char** argv)
     this->core_instance = core_instance;
     this->argc = argc;
     this->argv = argv;
+	solution.open("solution.txt", std::ios::out);
 }
 
 int base::parse_arguments(std::string * filename, int * mode, char * head, char * tail, bool * enable_loop)
@@ -119,11 +121,17 @@ int base::run()
 {
     parse_arguments(&filename, &mode, &head, &tail, &enable_loop);
     read_file(filename);
+	int len = 0;
     if (mode == WORD_MODE)
-        core_instance->gen_chain_word(inputs.data(), inputs.size(), outputs, head, tail, enable_loop);
+        len = core_instance->gen_chain_word(inputs.data(), inputs.size(), outputs, head, tail, enable_loop);
     else
-        core_instance->gen_chain_char(inputs.data(), inputs.size(), outputs, head, tail, enable_loop);
-    return 0;
+        len = core_instance->gen_chain_char(inputs.data(), inputs.size(), outputs, head, tail, enable_loop);
+	std::cout << "start output, len is " << len << std::endl;
+	for (int i = 0; i < len; i++)
+	{
+		solution << std::string(outputs[i]) << std::endl;
+	}
+	return 0;
 }
 
 int base::read_file(std::string filename)

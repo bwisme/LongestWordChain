@@ -2,7 +2,7 @@
 
 core::core()
 {
- 
+	init();
 }
 
 core::~core()
@@ -104,7 +104,8 @@ int core::get_ans(char* result[], int head, int tail){
         node = word_graph -> edges[dp_next[node]].to;
     }
     
-    return ans;
+    //return ans;
+	return cnt;
 }
 
 int core::error(int err_no) {

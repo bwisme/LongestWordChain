@@ -118,6 +118,7 @@ int graph::force_dfs(char* result[], int head, int tail) {
     }
     for (int i = 0; i < (int)loop_result.size(); i ++)
         result[i] = edges[loop_result[i]].word;
-    return loop_ans;
+    //return loop_ans;
+	return (int)loop_result.size();
 }
 
