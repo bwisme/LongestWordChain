@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "cxxopts.hpp"
+#include "base.h"
 
 
 int main(int argc, char* argv[])
@@ -32,6 +33,17 @@ int main(int argc, char* argv[])
     */
 
     //TODO pass processed arguments to Core and wait for results :)
+    try
+    {
+        core core_instance = core();
+        base base_instance(&core_instance, argc, argv);
+        base_instance.run();
+    }
+    catch (const std::exception& e)
+    {
+        std::cout << e.what() << std::endl;
+    }
+
 
 
     return 0;
