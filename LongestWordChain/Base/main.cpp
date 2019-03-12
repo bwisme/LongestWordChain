@@ -37,7 +37,17 @@ int main(int argc, char* argv[])
     {
         core core_instance = core();
         base base_instance(&core_instance, argc, argv);
-        base_instance.run();
+		std::clock_t start;
+		double duration;
+
+		start = std::clock();
+
+		base_instance.run();
+
+		duration = (std::clock() - start) / (double)CLOCKS_PER_SEC;
+
+		std::cout << "Time cost: " << duration << '\n';
+        
     }
     catch (const std::exception& e)
     {
