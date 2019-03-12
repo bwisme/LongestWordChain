@@ -1,6 +1,7 @@
 #include "core.h"
 #include <iostream>
 #include <set>
+#include <map>
 core::core()
 {
 	init();
@@ -157,17 +158,17 @@ void core::delete_word_from_words(char* words[], int len, char* word) {
     //add test
 }
 
-int core::delete_repeat_words(const char* words[], int len) {
-	std::set<std::string> S;
-	for (int i = 0; i < len; i++) {
-		S.insert(std::string(words[i]));
-	}
-	std::set<std::string>::iterator iter = S.begin();
+int core::delete_repeat_words(char* words[], int len) {
+	std::map<char*, int> M;
 	int cnt = 0;
-	while (iter != S.end()) {
-		words[cnt++] = (*iter).c_str();
+	for (int i = 0; i < len; i++) {
+		if (M.count(words[i]) == 0) {
+			M[words[i]] = 1;
+			words[cnt ++] = words[i];
+		}
 	}
 	return cnt;
+
 }
 
 int core::common_interface(char* words[], int len, char* result[], char head, char tail, bool enable_loop, int mod) {
