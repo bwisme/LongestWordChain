@@ -176,6 +176,7 @@ int core::common_interface(char* words[], int len, char* result[], char head, ch
         init();
         delete_word_from_words(words, len, result[0]);
         ans = main_func(words, len - 1, result, head, tail, enable_loop, mod);
+		len --;
     }
     return ans == 1 ? NO_LOOP : ans;
     //NO_LOOP defination at "core.h": -2

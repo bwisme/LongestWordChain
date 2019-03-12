@@ -25,9 +25,13 @@ public:
     int next[MAX_EDGE];
     edge edges[MAX_EDGE];
 
-    std::vector<int> loop_result; //有环的情况才会用到 一个全局变量，存储的是当前最长路径（边
+	int path[MAX_EDGE];
+	int path_len;
+
+    int loop_result[MAX_EDGE]; //有环的情况才会用到 一个全局变量，存储的是当前最长路径（边
     int loop_ans;//有环的情况才会用到 一个全局变量，存储的是当前最长路径的值
-    
+	int loop_len;
+
     bool self_loop; //是否有自环
     //记录的是从每个点出发的所有自环中的边
     std::vector< std::vector<int> > self_loop_edges;
@@ -54,7 +58,7 @@ public:
 
     int char_to_int(char ch);
     
-    void search_longest_path(std::vector<int>& edge_record, int u, int ans, int tail);
+    void search_longest_path(int u, int ans, int tail);
 
     int force_dfs(char* result[], int head, int tail);
     

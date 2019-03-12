@@ -99,7 +99,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>../Base/x64/Debug/base.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>../Base/x64/Debug/base.obj;../Base/x64/Debug/graph.obj;../Base/x64/Debug/core.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
