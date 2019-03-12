@@ -1,17 +1,12 @@
 #include "graph.h"
 graph::graph() {
-    init();
-}
-
-graph::~graph() {}
-
-void graph::init() {
     edge_count = 0;
     self_loop_edges = std::vector<std::vector<int>>(MAX_NODE, std::vector<int>());
     self_loop = false;
     memset(id, sizeof(id), 0);
     memset(vis_node, 0, sizeof(vis_node));
     memset(vis_edge, 0, sizeof(vis_edge));
+    memset(vis_self_loop, 0, sizeof(vis_self_loop));
     memset(head, 0, sizeof(head));
     memset(next, 0, sizeof(next));
     memset(edges, 0, sizeof(next));
@@ -19,6 +14,12 @@ void graph::init() {
     loop_result.clear();
     topo_result.clear();
 }
+
+graph::~graph() {}
+
+//void graph::init() {
+//
+//}
 
 int graph::char_to_int(char ch) {
     return ch - 'a';
@@ -41,7 +42,10 @@ bool graph::dfs(int u) {
     for(int j = head[u]; j; j = next[j]) {
         int v = edges[j].to;
         if(id[v]<0) return false;
-        else if(!id[v]) dfs(v);
+		else if (!id[v]) {
+			bool ret = dfs(v);
+			if (!ret) return false;
+		}
     }
     id[u] = 1; topo_result.push_back(u);
     return true;
@@ -61,14 +65,16 @@ bool graph::is_node(int u) {
 }
 
 void graph::search_longest_path(std::vector<int> &edge_record, int u, int ans, int tail) {
-    if (self_loop_edges[u].size() > 0) {
-        for (int indx = 0; indx < self_loop_edges[u].size(); indx ++) {
-            ans += edges[self_loop_edges[indx]].w;
-            edge_record.push_back(self_loop_edges[indx]);
+    if (!vis_self_loop[u] && self_loop_edges[u].size() > 0) {
+        for (int indx = 0; indx < (int)self_loop_edges[u].size(); indx ++) {
+            ans += edges[self_loop_edges[u][indx]].weight;
+            edge_record.push_back(self_loop_edges[u][indx]);
         }
+        vis_self_loop[u] = true;
     }
     if (u == tail) { //指定了结尾且当前就为结尾节点
-        if (ans > loop_ans) {
+        if (ans > loop_ans && edge_record.size() > 1) {
+            // edge_record 需要有两个以上的边
             loop_ans = ans;
             loop_result.assign(edge_record.begin(), edge_record.end());
         }
@@ -79,16 +85,24 @@ void graph::search_longest_path(std::vector<int> &edge_record, int u, int ans, i
         flag = true;
         vis_edge[j] = true;
         edge_record.push_back(j);
-        search_longest_path(edge_record, edges[j].to, ans + edges[j].w, tail);
+        search_longest_path(edge_record, edges[j].to, ans + edges[j].weight, tail);
+        edge_record.pop_back();
         vis_edge[j] = false;
     }
     if (!is_node(tail) && !flag) { //没有指定终点且没边可走
-        if (ans > loop_ans) {
+        if (ans > loop_ans && edge_record.size() > 1) {
             loop_ans = ans;
             loop_result.assign(edge_record.begin(), edge_record.end());
         }
     }
-    if (!flag) edge_record.pop_back();
+    if (vis_self_loop[u] && self_loop_edges[u].size() > 0) {
+        for (int indx = 0; indx < (int)self_loop_edges[u].size(); indx++) {
+            ans -= edges[self_loop_edges[u][indx]].weight;
+            edge_record.pop_back();
+        }
+        vis_self_loop[u] = false;
+    }
+    //if (!flag && !edge_record.empty()) edge_record.pop_back();
 }
 
 int graph::force_dfs(char* result[], int head, int tail) {
@@ -102,7 +116,7 @@ int graph::force_dfs(char* result[], int head, int tail) {
             search_longest_path(edge_record, u, 0, tail);
         }
     }
-    for (int i = 0; i < loop_result.size(); i ++)
+    for (int i = 0; i < (int)loop_result.size(); i ++)
         result[i] = edges[loop_result[i]].word;
     return loop_ans;
 }

@@ -36,7 +36,7 @@ public:
 
     int edge_count;
 
-    void init();
+    //void init();
 
     void add_edges(int from, int to, int w, char* word);
 
@@ -50,11 +50,13 @@ public:
     
     bool vis_edge[MAX_EDGE];
 
+    bool vis_self_loop[MAX_NODE];
+
     int char_to_int(char ch);
     
-    void search_longest_path(std::vector<int> edge_record, int u, int ans, int tail);
+    void search_longest_path(std::vector<int>& edge_record, int u, int ans, int tail);
 
-    int force_dfs(char* result, int head, int tail);
+    int force_dfs(char* result[], int head, int tail);
     
     bool is_node(int u);
 

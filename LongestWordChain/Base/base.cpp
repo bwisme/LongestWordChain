@@ -78,7 +78,7 @@ int base::read_file(std::string filename)
             }
             else
             {
-                word_buffer[char_count] = ch;
+                word_buffer[char_count] = tolower((int)ch);
                 char_count++;
 
             }
