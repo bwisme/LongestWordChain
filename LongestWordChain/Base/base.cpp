@@ -21,8 +21,9 @@ base::base(core * core_instance, int argc, char** argv)
         ("t,tail", "Specify tail character", cxxopts::value<char>())
         ("r,ring", "Permit word ring")
         ("filename", "Filename as-is", cxxopts::value<std::string>())
+		("could-not-exist", "for debugging", cxxopts::value<std::vector<std::string>>())
         ;
-    options.parse_positional({ "filename" });
+    options.parse_positional({ "filename", "could-not-exist" });
 
     
     this->core_instance = core_instance;
@@ -105,7 +106,10 @@ int base::parse_arguments(std::string * filename, int * mode, char * head, char 
         {
             *enable_loop = false;
         }
-
+		if (result.count["could-not-exist"])
+		{
+			std::cout << "You seem to input more than one filename, these files would not be parsed" << std::endl;
+		}
         //filename
         *filename = result["filename"].as<std::string>();
         return 0;
