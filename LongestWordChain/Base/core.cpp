@@ -152,6 +152,7 @@ void core::delete_word_from_words(char* words[], int len, char* word) {
             words[j] = words[j + 1];
         }
     }
+    //add test
 }
 
 int core::common_interface(char* words[], int len, char* result[], char head, char tail, bool enable_loop, int mod) {
