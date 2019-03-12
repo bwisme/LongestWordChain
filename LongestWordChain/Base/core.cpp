@@ -2,12 +2,16 @@
 
 core::core()
 {
-    word_graph = new graph();
-    memset(dp_next, 0, sizeof(dp_next));
+ 
 }
 
 core::~core()
 {
+}
+
+void core::init() {
+    word_graph = new graph();
+    memset(dp_next, 0, sizeof(dp_next));
 }
 
 int core::char_to_int(char ch) {
@@ -110,6 +114,8 @@ int core::error(int err_no) {
 }
 
 int core::main_func(char* words[], int len, char* result[], char head, char tail, bool enable_loop, int cal_mod) {
+    if (len == 1) return NO_LOOP;
+    
     this->head = head;
     this->tail = tail;
     make_graph(words, len, cal_mod);
@@ -133,10 +139,37 @@ int core::main_func(char* words[], int len, char* result[], char head, char tail
     return ans;
 }
 
+
+void core::delete_word_from_words(char* words[], int len, char* word) {
+    int indx = -1;
+    for (int i = 0; i < len; i ++) {
+        if (!strcmp(words[i], word)) {
+            indx = i; break;
+        }
+    }
+    if (indx >= 0) {
+        for (int j = indx; j < len - 1; j ++) {
+            words[j] = words[j + 1];
+        }
+    }
+    //add test
+}
+
+int core::common_interface(char* words[], int len, char* result[], char head, char tail, bool enable_loop, int mod) {
+    int ans =  main_func(words, len, result, head, tail, enable_loop, mod);
+    while (ans == 1 && len > 1) {
+        init();
+        delete_word_from_words(words, len, result[0]);
+        ans = main_func(words, len - 1, result, head, tail, enable_loop, mod);
+    }
+    return ans == 1 ? NO_LOOP : ans;
+    //NO_LOOP defination at "core.h": -2
+}
+
 int core::gen_chain_word(char* words[], int len, char* result[], char head, char tail, bool enable_loop) {
-    return main_func(words, len, result, head, tail, enable_loop, WORD);
+    return common_interface(words, len, result, head, tail, enable_loop, WORD);
 }
 
 int core::gen_chain_char(char* words[], int len, char* result[], char head, char tail, bool enable_loop) {
-    return main_func(words, len, result, head, tail, enable_loop, CHAR);
+    return common_interface(words, len, result, head, tail, enable_loop, CHAR);
 }
