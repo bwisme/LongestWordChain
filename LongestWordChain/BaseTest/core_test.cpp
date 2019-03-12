@@ -110,60 +110,29 @@ namespace BaseTest
             core c;
             char* words[] =
             {
-"aab",
-"bac",
-"cad",
-"dae",
-"eaa",
-"aab",
-"bac",
-"cad",
-"dae",
-"eaf",
-"fag",
-"gah",
-"hai",
-"iaj",
-"jak",
-"kal",
-"lam",
-"man",
-"nao",
-"oap",
-"paq",
-"qag",
-"gah",
-"hai",
-"iaj",
-"jak",
-"kal",
-"lam",
-"man",
-"nao",
-"oap",
-"paq",
-"qar",
-"ras",
-"sat",
-"tau",
-"uav",
-"vaw",
-"wax",
-"xay",
-"yaz",
-"zar",
-"raa",
-"gar"
+				"aba",
+				"atb"
 
             };
             char* results[100];
-            char* results2[100];
-            int len = c.gen_chain_word(words, 44, results, 0, 'a', true);
-            //int len2 = c.gen_chain_char(words, 44, results2, 0, 0, true);
-            Assert::AreEqual(43, len);
-            //Assert::AreEqual(129, len2);
-
+            int len = c.gen_chain_word(words,2, results, 0, 0, false);
+			Assert::AreEqual(2, len);
         }
+		TEST_METHOD(GetChainCharTest6)
+		{
+			// test file exist
+			core c;
+			char* words[] =
+			{
+				"axb",
+				"bya",
+				"axb"
+
+			};
+			char* results[100];
+			int len = c.gen_chain_word(words, 3, results, 0, 0, true);
+			Assert::AreEqual(2, len);
+		}
 
 
 
