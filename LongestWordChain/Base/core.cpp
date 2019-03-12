@@ -10,10 +10,10 @@ core::~core()
 {
 }
 
-//void core::init() {
-//    word_graph = new graph();
-//    memset(dp_next, 0, sizeof(dp_next));
-//}
+void core::init() {
+    word_graph = new graph();
+    memset(dp_next, 0, sizeof(dp_next));
+}
 
 int core::char_to_int(char ch) {
     return ch - 'a';
