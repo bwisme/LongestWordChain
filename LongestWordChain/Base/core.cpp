@@ -55,7 +55,7 @@ void core::get_dp_result() {
         for (int j = word_graph -> head[u]; j; j = word_graph -> next[j]) {
             int v = word_graph -> edges[j].to;
             int dp_result_v = dp_result[v] + word_graph -> edges[j].weight + get_first_self_loop_weight(v);
-            int dp_result_u = dp_result[u] + get_first_self_loop_weight(u);
+			int dp_result_u = dp_result[u];// + get_first_self_loop_weight(u);
             if (dp_result_v > dp_result_u) {
                 dp_result[u] = dp_result_v;
                 dp_next[u] = j;
@@ -160,20 +160,18 @@ void core::delete_word_from_words(char* words[], int len, char* word) {
 
 int core::delete_repeat_words(char* words[], int len) {
 	std::map<char*, int> M;
-	int cnt = 0;
-	for (int i = 0; i < len; i++) {
-		if (M.count(words[i]) == 0) {
-			M[words[i]] = 1;
-			words[cnt ++] = words[i];
-		}
-	}
-	return cnt;
+	this->orig_words = std::vector<std::string>(words, words + len);
+	std::sort(orig_words.begin(), orig_words.end());
+	orig_words.erase(std::unique(orig_words.begin(), orig_words.end()), orig_words.end());
+	for (auto& string : orig_words)
+		this->non_repeat_words.push_back(&string.front());
+	return (int)orig_words.size();
 
 }
 
 int core::common_interface(char* words[], int len, char* result[], char head, char tail, bool enable_loop, int mod) {
 	len = delete_repeat_words(words, len);
-
+	words = this->non_repeat_words.data();
     int ans =  main_func(words, len, result, head, tail, enable_loop, mod);
     while (ans == 1 && len > 1) {
         init();

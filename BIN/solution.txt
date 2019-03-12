@@ -1,4 +1,2 @@
-algebra
-apple
-elephant
-trick
+axb
+bya
