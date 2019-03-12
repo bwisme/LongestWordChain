@@ -94,6 +94,7 @@ void graph::search_longest_path(int u, int ans, int tail) {
     if (!is_node(tail) && !flag) { //没有指定终点且没边可走
         if (ans > loop_ans && path_len > 1) {
             loop_ans = ans;
+			loop_len = path_len;
 			for (int i = 0; i < path_len; i++)
 				loop_result[i] = path[i];
         }
@@ -101,7 +102,7 @@ void graph::search_longest_path(int u, int ans, int tail) {
     if (vis_self_loop[u] && self_loop_edges[u].size() > 0) {
         for (int indx = 0; indx < (int)self_loop_edges[u].size(); indx++) {
             ans -= edges[self_loop_edges[u][indx]].weight;
-			path_len--;
+			path_len --;
         }
         vis_self_loop[u] = false;
     }
