@@ -1,4 +1,0 @@
-LIBRARY Core
-EXPORTS
-	get_chain_word @1
-	get_chain_char @2
