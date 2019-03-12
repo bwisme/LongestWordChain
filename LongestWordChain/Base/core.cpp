@@ -159,7 +159,6 @@ void core::delete_word_from_words(char* words[], int len, char* word) {
 }
 
 int core::delete_repeat_words(char* words[], int len) {
-	std::map<char*, int> M;
 	this->orig_words = std::vector<std::string>(words, words + len);
 	std::sort(orig_words.begin(), orig_words.end());
 	orig_words.erase(std::unique(orig_words.begin(), orig_words.end()), orig_words.end());
