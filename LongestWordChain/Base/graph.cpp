@@ -91,7 +91,7 @@ void graph::search_longest_path(std::vector<int> &edge_record, int u, int ans, i
     if (!flag) edge_record.pop_back();
 }
 
-int graph::force_dfs(char* result, int head, int tail) {
+int graph::force_dfs(char* result[], int head, int tail) {
     std::vector<int> edge_record;
     if (is_node(head)) {
         search_longest_path(edge_record, head, 0, tail);
