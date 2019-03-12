@@ -106,7 +106,7 @@ int base::parse_arguments(std::string * filename, int * mode, char * head, char 
         {
             *enable_loop = false;
         }
-		if (result.count["could-not-exist"])
+		if (result.count("could-not-exist"))
 		{
 			std::cout << "You seem to input more than one filename, these files would not be parsed" << std::endl;
 		}

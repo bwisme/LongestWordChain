@@ -1,4 +1,3 @@
-algebra
-apple
-elephant
-trick
+aba
+aba
+atb

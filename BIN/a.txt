@@ -1,12 +1,3 @@
-"algebra",
-"apple",
-"apple",
-"zoo",
-"elephant",
-"under",
-"fox",
-"dog",
-"moon",
-"leaf",
-"trick",
-"pseudopseudohypoparathyroidism"
+"aba"
+"aba"
+"atb"

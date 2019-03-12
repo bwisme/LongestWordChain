@@ -55,7 +55,7 @@ void core::get_dp_result() {
         for (int j = word_graph -> head[u]; j; j = word_graph -> next[j]) {
             int v = word_graph -> edges[j].to;
             int dp_result_v = dp_result[v] + word_graph -> edges[j].weight + get_first_self_loop_weight(v);
-            int dp_result_u = dp_result[u] + get_first_self_loop_weight(u);
+            int dp_result_u = dp_result[u];
             if (dp_result_v > dp_result_u) {
                 dp_result[u] = dp_result_v;
                 dp_next[u] = j;
@@ -168,7 +168,6 @@ int core::delete_repeat_words(char* words[], int len) {
 		}
 	}
 	return cnt;
-
 }
 
 int core::common_interface(char* words[], int len, char* result[], char head, char tail, bool enable_loop, int mod) {
