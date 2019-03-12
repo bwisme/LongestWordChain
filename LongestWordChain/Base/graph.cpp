@@ -116,7 +116,7 @@ int graph::force_dfs(char* result[], int head, int tail) {
         search_longest_path(head, 0, tail);
     } else {
         for (int u = 0; u < MAX_NODE; u ++) if (vis_node[u]) {
-			path_len = 0; loop_ans = 0; loop_len = 0;
+			path_len = 0; //loop_ans = 0; loop_len = 0;
             memset(vis_edge, 0, sizeof(vis_edge));
             search_longest_path(u, 0, tail);
         }
