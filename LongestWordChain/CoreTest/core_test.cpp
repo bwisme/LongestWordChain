@@ -177,15 +177,15 @@ namespace CoreTest
 			core c;
 			char* words[] =
 			{
-				"aab",
+				"aaB",
 				"bac",
-				"cad",
+				"caD",
 				"dae",
 				"eaf",
 				"fag",
 				"gah",
 				"hai",
-				"iaj",
+				"iAj",
 				"jak",
 				"kaa",
 				"oar",
@@ -194,7 +194,18 @@ namespace CoreTest
 			};
 			char* results[100];
 			int len = c.gen_chain_word(words, 14, results, 0, 0, true);
-			
+			Assert::AreEqual(11, len);
+			Assert::AreEqual(results[0], "aab");
+			Assert::AreEqual(results[1], "bac");
+			Assert::AreEqual(results[2], "cad");
+			Assert::AreEqual(results[3], "dae");
+			Assert::AreEqual(results[4], "eaf");
+			Assert::AreEqual(results[5], "fag");
+			Assert::AreEqual(results[6], "gah");
+			Assert::AreEqual(results[7], "hai");
+			Assert::AreEqual(results[8], "iaj");
+			Assert::AreEqual(results[9], "jak");
+			Assert::AreEqual(results[10], "kaa");
 		}
 	};
 }
