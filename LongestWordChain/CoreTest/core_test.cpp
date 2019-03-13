@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include "../Core/core_dll.h"
+#include "../Core/Core.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -12,7 +13,7 @@ namespace CoreTest
 		TEST_METHOD(Example1)
 		{
 			// test file exist
-			core c;
+
 			char* words[] =
 			{
 				"algebra",
@@ -28,7 +29,7 @@ namespace CoreTest
 				"pseudopseudohypoparathyroidism"
 			};
 			char* results[100];
-			c.gen_chain_word(words, 11, results, 0, 0, false);
+			get_chain_word(words, 11, results, 0, 0, false);
 			Assert::AreEqual(results[0], "algebra");
 			Assert::AreEqual(results[1], "apple");
 			Assert::AreEqual(results[2], "elephant");
@@ -41,7 +42,7 @@ namespace CoreTest
 		TEST_METHOD(GetChainWordTest5)
 		{
 			// test file exist
-			core c;
+
 			char* words[] =
 			{
 				"aba",
@@ -49,13 +50,13 @@ namespace CoreTest
 
 			};
 			char* results[100];
-			int len = c.gen_chain_word(words, 2, results, 0, 0, false);
+			int len = get_chain_word(words, 2, results, 0, 0, false);
 			Assert::AreEqual(2, len);
 		}
 		TEST_METHOD(GetChainWordTest6)
 		{
 			// test file exist
-			core c;
+
 			char* words[] =
 			{
 				"axb",
@@ -63,13 +64,13 @@ namespace CoreTest
 				"axb"
 			};
 			char* results[100];
-			int len = c.gen_chain_word(words, 3, results, 0, 0, true);
+			int len = get_chain_word(words, 3, results, 0, 0, true);
 			Assert::AreEqual(2, len);
 		}
 
 		TEST_METHOD(HeadTailTest1)
 		{
-			core c;
+
 			char* words[] =
 			{
 				"aab",
@@ -84,7 +85,7 @@ namespace CoreTest
 
 			};
 			char* results[100];
-			int len = c.gen_chain_word(words, 9, results, 'a', 'e', false);
+			int len = get_chain_word(words, 9, results, 'a', 'e', false);
 			Assert::AreEqual(4, len);
 			Assert::AreEqual(results[0], "aab");
 			Assert::AreEqual(results[1], "bbc");
@@ -102,7 +103,6 @@ namespace CoreTest
 		TEST_METHOD(ExampleWithRing)
 		{
 			// test file exist
-			core c;
 			char* words[] =
 			{
 				"element",
@@ -112,7 +112,7 @@ namespace CoreTest
 				"talk"
 			};
 			char* results[100];
-			c.gen_chain_word(words, 5, results, 0, 0, true);
+			get_chain_word(words, 5, results, 0, 0, true);
 			Assert::AreEqual(results[0], "table");
 			Assert::AreEqual(results[1], "element");
 			Assert::AreEqual(results[2], "teach");
@@ -122,7 +122,6 @@ namespace CoreTest
 		TEST_METHOD(GetChainWordTest3)
 		{
 			// test file exist
-			core c;
 			char* words[] =
 			{
 				"element",
@@ -134,7 +133,7 @@ namespace CoreTest
 				"talk"
 			};
 			char* results[100];
-			c.gen_chain_word(words, 7, results, 0, 0, true);
+			get_chain_word(words, 7, results, 0, 0, true);
 			Assert::AreEqual(results[0], "table");
 			Assert::AreEqual(results[1], "element");
 			Assert::AreEqual(results[2], "teach");
@@ -144,7 +143,7 @@ namespace CoreTest
 		TEST_METHOD(GetChainWordTest4)
 		{
 			// test file exist
-			core c;
+
 			char* words[] =
 			{
 				"aab",
@@ -163,7 +162,7 @@ namespace CoreTest
 				"qaz"
 			};
 			char* results[100];
-			int len = c.gen_chain_word(words, 14, results, 0, 0, true);
+			int len = get_chain_word(words, 14, results, 0, 0, true);
 			Assert::AreEqual(11, len);
 
 		}
@@ -174,7 +173,7 @@ namespace CoreTest
 	public:
 		TEST_METHOD(WordsException1)
 		{
-			core c;
+
 			char* words[] =
 			{
 				"aaB",
@@ -193,7 +192,7 @@ namespace CoreTest
 				"qaz"
 			};
 			char* results[100];
-			int len = c.gen_chain_word(words, 14, results, 0, 0, true);
+			int len = get_chain_word(words, 14, results, 0, 0, true);
 			Assert::AreEqual(11, len);
 			Assert::AreEqual(results[0], "aab");
 			Assert::AreEqual(results[1], "bac");
@@ -206,6 +205,8 @@ namespace CoreTest
 			Assert::AreEqual(results[8], "iaj");
 			Assert::AreEqual(results[9], "jak");
 			Assert::AreEqual(results[10], "kaa");
+			
 		}
+
 	};
 }

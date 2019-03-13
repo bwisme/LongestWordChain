@@ -118,7 +118,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>../Core/Debug/core_dll.obj;../Core/Debug/graph.obj;../Core/Debug/Core.obj;../Core/Debug/dllmain.obj;../Core/Debug/stdafx.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>../Core/Debug/core_dll.obj;../Core/Debug/graph.obj;../Core/Debug/dllmain.obj;../Core/Debug/stdafx.obj;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>

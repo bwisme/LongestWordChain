@@ -46,7 +46,7 @@ public:
 	bool enable_loop;
 
 private:
-    cxxopts::Options options = cxxopts::Options("LongestWordChain", "Find the longest word chain in a text file.")
+	cxxopts::Options options = cxxopts::Options("LongestWordChain", "Find the longest word chain in a text file.");
 	std::ofstream solution;
 
 
