@@ -67,6 +67,67 @@ namespace CoreTest
 			Assert::AreEqual(2, len);
 		}
 
+		TEST_METHOD(GetChainWordTest9)
+		{
+			// test file exist
+			core c;
+			char* words[] =
+			{
+				"aaaaaaaaaaab",
+			    "cd",
+                "de"
+			};
+			char* results[100];
+			int len = c.gen_chain_word(words, 3, results, 0, 0, true);
+			Assert::AreEqual(2, len);
+		}
+
+		TEST_METHOD(GetChainWordTest8)
+		{
+			// test file exist
+			core c;
+			char* words[] =
+			{
+				"aaaaaaaaaaab",
+				"cd",
+				"de"
+			};
+			char* results[100];
+			int len = c.gen_chain_word(words, 3, results, 'a', 0, true);
+			Assert::AreEqual(0, len);
+		}
+
+		TEST_METHOD(GetChainWordTest7)
+		{
+			// test file exist
+			core c;
+			char* words[] =
+			{
+				"aaaaaaaaaaab",
+				"cd",
+				"de"
+			};
+			char* results[100];
+			int len = c.gen_chain_word(words, 3, results, 0, 'e', true);
+			Assert::AreEqual(2, len);
+		}
+
+		TEST_METHOD(GetChainWordTest10)
+		{
+			// test file exist
+			core c;
+			char* words[] =
+			{
+				"aaaaaaaaaaab",
+				"cc",
+				"cc", 
+				"ce"
+			};
+			char* results[100];
+			int len = c.gen_chain_char(words, 4, results, 0, 0, true);
+			Assert::AreEqual(2, len);
+		}
+
 		TEST_METHOD(HeadTailTest1)
 		{
 			core c;
@@ -193,7 +254,7 @@ namespace CoreTest
 				"qaz"
 			};
 			char* results[100];
-			int len = c.gen_chain_word(words, 14, results, 0, 0, true);
+			int len = c.gen_chain_word(words, 14, results, 'a', 0, true);
 			Assert::AreEqual(11, len);
 			Assert::AreEqual(results[0], "aab");
 			Assert::AreEqual(results[1], "bac");
