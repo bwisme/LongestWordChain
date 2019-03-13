@@ -9,8 +9,7 @@ namespace CoreTest
 	TEST_CLASS(GetChainWordTest)
 	{
 	public:
-
-		TEST_METHOD(GetChainCharTest1)
+		TEST_METHOD(Example1)
 		{
 			// test file exist
 			core c;
@@ -36,7 +35,71 @@ namespace CoreTest
 			Assert::AreEqual(results[3], "trick");
 
 		}
-		TEST_METHOD(GetChainCharTest2)
+
+
+
+		TEST_METHOD(GetChainWordTest5)
+		{
+			// test file exist
+			core c;
+			char* words[] =
+			{
+				"aba",
+				"atb"
+
+			};
+			char* results[100];
+			int len = c.gen_chain_word(words, 2, results, 0, 0, false);
+			Assert::AreEqual(2, len);
+		}
+		TEST_METHOD(GetChainWordTest6)
+		{
+			// test file exist
+			core c;
+			char* words[] =
+			{
+				"axb",
+				"bya",
+				"axb"
+			};
+			char* results[100];
+			int len = c.gen_chain_word(words, 3, results, 0, 0, true);
+			Assert::AreEqual(2, len);
+		}
+
+		TEST_METHOD(HeadTailTest1)
+		{
+			core c;
+			char* words[] =
+			{
+				"aab",
+				"bbc",
+				"cce",
+				"eee",
+				"fgg",
+				"ghh",
+				"hii",
+				"ion",
+				"nom"
+
+			};
+			char* results[100];
+			int len = c.gen_chain_word(words, 9, results, 'a', 'e', false);
+			Assert::AreEqual(4, len);
+			Assert::AreEqual(results[0], "aab");
+			Assert::AreEqual(results[1], "bbc");
+			Assert::AreEqual(results[2], "cce");
+			Assert::AreEqual(results[3], "eee");
+		}
+
+
+
+	};
+	TEST_CLASS(GetChainCharTest) {};
+	TEST_CLASS(RingTest) 
+	{
+	public:
+		TEST_METHOD(ExampleWithRing)
 		{
 			// test file exist
 			core c;
@@ -56,7 +119,7 @@ namespace CoreTest
 			Assert::AreEqual(results[3], "heaven");
 
 		}
-		TEST_METHOD(GetChainCharTest3)
+		TEST_METHOD(GetChainWordTest3)
 		{
 			// test file exist
 			core c;
@@ -78,7 +141,7 @@ namespace CoreTest
 			Assert::AreEqual(results[5], "heaven");
 
 		}
-		TEST_METHOD(GetChainCharTest4)
+		TEST_METHOD(GetChainWordTest4)
 		{
 			// test file exist
 			core c;
@@ -104,40 +167,34 @@ namespace CoreTest
 			Assert::AreEqual(11, len);
 
 		}
-		TEST_METHOD(GetChainCharTest5)
-		{
-			// test file exist
-			core c;
-			char* words[] =
-			{
-				"aba",
-				"atb"
-
-			};
-			char* results[100];
-			int len = c.gen_chain_word(words, 2, results, 0, 0, false);
-			Assert::AreEqual(2, len);
-		}
-		TEST_METHOD(GetChainCharTest6)
-		{
-			// test file exist
-			core c;
-			char* words[] =
-			{
-				"axb",
-				"bya",
-				"axb"
-
-			};
-			char* results[100];
-			int len = c.gen_chain_word(words, 3, results, 0, 0, true);
-			Assert::AreEqual(2, len);
-		}
-
-
-
-
 	};
-	TEST_CLASS(GetChainCharTest) {};
-	TEST_CLASS(RingTest) {};
+
+	TEST_CLASS(ExceptionTest)
+	{
+	public:
+		TEST_METHOD(WordsException1)
+		{
+			core c;
+			char* words[] =
+			{
+				"aab",
+				"bac",
+				"cad",
+				"dae",
+				"eaf",
+				"fag",
+				"gah",
+				"hai",
+				"iaj",
+				"jak",
+				"kaa",
+				"oar",
+				"rat",
+				"qaz"
+			};
+			char* results[100];
+			int len = c.gen_chain_word(words, 14, results, 0, 0, true);
+			
+		}
+	};
 }
