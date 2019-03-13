@@ -7,7 +7,7 @@
 #include <stdexcept>
 #include <iostream>
 #include <fstream>
-#include "core.h"
+#include "windows.h"
 
 
 #define MAX_WORD 10010
@@ -15,6 +15,7 @@
 #define WORD_MODE 1
 #define CHAR_MODE 2
 
+typedef int(*core_func_ptr)(char**, int, char**, char, char, bool);
 
 class base
 {
@@ -22,14 +23,14 @@ public:
     base();
     ~base();
     
-    base(core* core_instance, int argc, char** argv);
+    base(int argc, char** argv);
 
     std::vector<char*> inputs ; //input words, pass input.data() as char**
     std::vector<std::string> strings;
     //std::vector<char*> outputs; //results
     char* outputs[10010];
 
-    core* core_instance; // call core apis
+    //core* core_instance; // call core apis
     int argc;
     char** argv;
     std::string filename;

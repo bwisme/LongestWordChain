@@ -27,6 +27,9 @@
     <ClInclude Include="graph.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Core.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -44,10 +47,5 @@
     <ClCompile Include="graph.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Core.def">
-      <Filter>源文件</Filter>
-    </None>
   </ItemGroup>
 </Project>

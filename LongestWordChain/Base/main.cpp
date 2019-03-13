@@ -35,8 +35,8 @@ int main(int argc, char* argv[])
     //TODO pass processed arguments to Core and wait for results :)
     try
     {
-        core core_instance = core();
-        base base_instance(&core_instance, argc, argv);
+        //core core_instance = core();
+        base base_instance(argc, argv);
 		std::clock_t start;
 		double duration;
 
