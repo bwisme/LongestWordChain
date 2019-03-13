@@ -121,29 +121,35 @@ int base::parse_arguments(std::string * filename, int * mode, char * head, char 
 
 int base::run()
 {
-    parse_arguments(&filename, &mode, &head, &tail, &enable_loop);
-    read_file(filename);
-	int len = 0;
- /*   if (mode == WORD_MODE)
-        len = core_instance->gen_chain_word(inputs.data(), inputs.size(), outputs, head, tail, enable_loop);
-    else
-        len = core_instance->gen_chain_char(inputs.data(), inputs.size(), outputs, head, tail, enable_loop);*/
-
 	HINSTANCE hCoreDLL = LoadLibrary("../Debug/Core.dll");
 
 	if (!hCoreDLL) {
 		std::cout << "could not load the dynamic library" << std::endl;
 		return EXIT_FAILURE;
 	}
-
-	// resolve function address here
-	core_func_ptr get_chain_word = (core_func_ptr)GetProcAddress(hCoreDLL, "get_chain_word");
-	if (!get_chain_word) {
-		std::cout << "could not locate the function" << std::endl;
-		return EXIT_FAILURE;
+	
+	parse_arguments(&filename, &mode, &head, &tail, &enable_loop);
+    read_file(filename);
+	int len = 0;
+	core_func_ptr core_func;
+	if (mode == WORD_MODE)
+	{
+		core_func = (core_func_ptr)GetProcAddress(hCoreDLL, "get_chain_word");
+		if (!core_func) {
+			std::cout << "could not locate the function: get_chain_word" << std::endl;
+			return EXIT_FAILURE;
+		}
+	}
+	else 
+	{
+		core_func = (core_func_ptr)GetProcAddress(hCoreDLL, "get_chain_char");
+		if (!core_func) {
+			std::cout << "could not locate the function: get_chain_char" << std::endl;
+			return EXIT_FAILURE;
+		}
 	}
 
-	len = get_chain_word(inputs.data(), inputs.size(), outputs, head, tail, enable_loop);
+	len = core_func(inputs.data(), inputs.size(), outputs, head, tail, enable_loop);
 
 	std::cout << "start output, len is " << len << std::endl;
 	for (int i = 0; i < len; i++)
