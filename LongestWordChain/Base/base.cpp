@@ -121,7 +121,7 @@ int base::parse_arguments(std::string * filename, int * mode, char * head, char 
 
 int base::run()
 {
-	HINSTANCE hCoreDLL = LoadLibrary("../Debug/Core.dll");
+	HINSTANCE hCoreDLL = LoadLibrary("Core.dll");
 
 	if (!hCoreDLL) {
 		std::cout << "could not load the dynamic library" << std::endl;

@@ -267,3 +267,5 @@ __pycache__/
 
 *.ipdb
 *.iobj
+**/BIN/*.exp
+**/BIN/*.lib
