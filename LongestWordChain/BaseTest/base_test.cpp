@@ -6,7 +6,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace BaseTest
 {		
-	TEST_CLASS(BaseTest1)
+	TEST_CLASS(ReadFileTest)
 	{
 	public:
 		
@@ -29,6 +29,15 @@ namespace BaseTest
             Assert::AreEqual(b.inputs[2], "third");
         }
 
+	};
 
+	TEST_CLASS(ParseArgumentsTest)
+	{
+	public:
+
+		TEST_METHOD(NormalTest1)
+		{
+
+		}
 	};
 }

@@ -25,29 +25,28 @@ public:
     
     base(int argc, char** argv);
 
-    std::vector<char*> inputs ; //input words, pass input.data() as char**
-    std::vector<std::string> strings;
-    //std::vector<char*> outputs; //results
-    char* outputs[10010];
 
-    //core* core_instance; // call core apis
-    int argc;
-    char** argv;
-    std::string filename;
-    int mode;
-    char head;
-    char tail;
-    bool enable_loop;
 
     int run();
-
     int read_file(std::string filename); //read words into inputs
     int parse_arguments(std::string* filename, int* mode, char* head, char* tail, bool* enable_loop);
+	
+	std::vector<char*> inputs; //input words, pass input.data() as char**
+	std::vector<std::string> strings;
+	//std::vector<char*> outputs; //results
+	char* outputs[10010];
+
+	//core* core_instance; // call core apis
+	int argc;
+	char** argv;
+	std::string filename;
+	int mode;
+	char head;
+	char tail;
+	bool enable_loop;
 
 private:
-    cxxopts::Options options = cxxopts::Options("LongestWordChain", "Find the longest word chain in a text file.");
-
-    
+    cxxopts::Options options = cxxopts::Options("LongestWordChain", "Find the longest word chain in a text file.")
 	std::ofstream solution;
 
 
