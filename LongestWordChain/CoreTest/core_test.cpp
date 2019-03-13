@@ -5,6 +5,21 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
+namespace exception_test
+{
+	void invalid_char_test()
+	{
+		char* words[] =
+		{
+			"a12345",
+			"avdc",
+			"fewt"
+		};
+		char* results[100];
+		int len = get_chain_word(words, 3, results, 0, 0, true);
+	}
+}
+
 namespace CoreTest
 {
 	TEST_CLASS(GetChainWordTest)
@@ -205,8 +220,54 @@ namespace CoreTest
 			Assert::AreEqual(results[8], "iaj");
 			Assert::AreEqual(results[9], "jak");
 			Assert::AreEqual(results[10], "kaa");
-			
 		}
+
+		TEST_METHOD(WordsException3)
+		{
+
+			char* words[] =
+			{
+				"aaB",
+				"fac",
+				"defg",
+				"hijk"
+			};
+			char* results[100];
+			int len;
+			len = get_chain_word(words, 4, results, 0, 'z', false);
+			Assert::AreEqual(0, len);
+			len = get_chain_char(words, 4, results, 0, 'z', false);
+			Assert::AreEqual(0, len);
+			len = get_chain_word(words, 4, results, 'z', 0, false);
+			Assert::AreEqual(0, len);
+			len = get_chain_char(words, 4, results, 'z', 0, false);
+			Assert::AreEqual(0, len);
+			len = get_chain_word(words, 4, results, 'r', 'z', false);
+			Assert::AreEqual(0, len);
+			len = get_chain_char(words, 4, results, 'r', 'z', false);
+			Assert::AreEqual(0, len);
+
+		}
+
+
+
+
+
+
+		TEST_METHOD(WordsException2)
+		{
+			Assert::ExpectException<std::invalid_argument>([&] {exception_test::invalid_char_test(); });
+			try
+			{
+				exception_test::invalid_char_test();
+			}
+			catch (const std::exception& e)
+			{
+				Assert::AreEqual("Core: invalid char in words", e.what());
+			}
+		}
+
+
 
 	};
 }

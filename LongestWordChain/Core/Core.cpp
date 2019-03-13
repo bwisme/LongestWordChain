@@ -26,6 +26,9 @@ extern "C" CORE_API int get_chain_word(char* words[], int len, char* result[], c
 	case -3:
 		throw std::invalid_argument("Core: too much words");
 		break;
+	case -4:
+		throw std::invalid_argument("Core: not enough words");
+		break;
 	}
 	return c.get_chain_word(words_new, len, result, head, tail, enable_loop);
 }
@@ -52,6 +55,9 @@ extern "C" CORE_API int get_chain_char(char* words[], int len, char* result[], c
 	case -3:
 		throw std::invalid_argument("Core: too much words");
 		break;
+	case -4:
+		throw std::invalid_argument("Core: not enough words");
+		break;
 	}
 	return c.get_chain_char(words_new, len, result, head, tail, enable_loop);
 }
@@ -61,6 +67,8 @@ int check_words(char * words[], char* words_new[], int len)
 	{
 		if (len > 10000)
 			return -3; // too much words
+		else if (len <= 1)
+			return -4;
 		for (int i = 0; i < len; i++)
 		{
 			int sl = strlen(words[i]);

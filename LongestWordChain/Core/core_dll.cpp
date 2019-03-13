@@ -76,7 +76,7 @@ int core::get_ans_loop(char* result[], int head, int tail) {
 
 int core::get_ans(char* result[], int head, int tail){
     get_dp_result();
-    int ans = 0, from;
+    int ans = 0, from = -1;
     if (mod == ORD || mod == TAIL) {
         for (int i = 0; i < MAX_NODE; i ++) {
             int dp_result_i = dp_result[i] + get_first_self_loop_weight(i);
@@ -91,6 +91,8 @@ int core::get_ans(char* result[], int head, int tail){
         ans = dp_result[from] + get_first_self_loop_weight(from);
     }
     
+	if (from == -1)
+		return 0; // not found
     int node = from, cnt = 0;
     while (dp_next[node]) {
         // if node has self loops, these words must be included
@@ -124,13 +126,31 @@ int core::error(int err_no) {
 }
 
 int core::main_func(char* words[], int len, char* result[], char head, char tail, bool enable_loop, int cal_mod) {
-    if (len == 1) return NO_LOOP;
     
     this->head = head;
     this->tail = tail;
     make_graph(words, len, cal_mod);
     
-    init_dp(head, tail, enable_loop);
+	// judge head and tail
+	if (head && !isalpha(head) || tail && !isalpha(tail))
+		throw std::invalid_argument("Core: invalid head or tail");
+	if (head) 
+	{
+		head = tolower(head);
+		if (!word_graph->vis_node[char_to_int(head)])
+		{
+			return 0;
+		}
+	}
+	if (tail) 
+	{
+		tail = tolower(tail);
+		if (!word_graph->vis_node[char_to_int(tail)])
+		{
+			return 0;
+		}
+	}
+	init_dp(head, tail, enable_loop);
     
     bool ok = word_graph -> topological_sort();
     int ans = 0;
@@ -140,7 +160,8 @@ int core::main_func(char* words[], int len, char* result[], char head, char tail
             //有向有环图求最长简单路径
             ans = get_ans_loop(result, char_to_int(head), char_to_int(tail));
         } else {
-            ans = error(HAS_LOOP);
+            //ans = error(HAS_LOOP);
+			throw std::invalid_argument("Core: loop deteced in words, you need to use -r to parse.");
         }
     } else {
         ans = get_ans(result, char_to_int(head), char_to_int(tail));
@@ -181,6 +202,7 @@ int core::delete_repeat_words(char* words[], int len) {
 
 int core::common_interface(char* words[], int len, char* result[], char head, char tail, bool enable_loop, int mod) {
 	
+	
 	len = delete_repeat_words(words, len);
 	words = this->non_repeat_words.data();
     int ans =  main_func(words, len, result, head, tail, enable_loop, mod);
@@ -190,7 +212,11 @@ int core::common_interface(char* words[], int len, char* result[], char head, ch
         ans = main_func(words, len - 1, result, head, tail, enable_loop, mod);
 		len --;
     }
-    return ans == 1 ? NO_LOOP : ans;
+    
+	if (ans <= 1)
+		return 0;
+	//else
+	return ans;
     //NO_LOOP defination at "core.h": -2
 }
 

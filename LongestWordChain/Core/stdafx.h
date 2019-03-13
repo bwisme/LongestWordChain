@@ -15,3 +15,4 @@
 
 // 在此处引用程序需要的其他标头
 #include "core_dll.h"
+#include <iostream>
