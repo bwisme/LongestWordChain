@@ -63,7 +63,75 @@ namespace BaseTest
 
 		TEST_METHOD(NormalTest1)
 		{
+			
+				int argc = 4;
+				char* argv[] = { "base.exe", "-w", "-r", "a.txt" };
+				base b(argc, argv);
+				std::string filename;
+				int mode;
+				char head, tail;
+				bool enable_loop;
+				b.parse_arguments(&filename, &mode, &head, &tail, &enable_loop);
+				Assert::AreEqual(filename, std::string("a.txt"));
+				Assert::AreEqual(enable_loop, true);
+			
+		}
 
+		TEST_METHOD(NormalTest2)
+		{
+			int argc = 4;
+			char* argv[] = { "base.exe", "-c", "-r", "a.txt"};
+			base b(argc, argv);
+			std::string filename;
+			int mode;
+			char head, tail;
+			bool enable_loop;
+			b.parse_arguments(&filename, &mode, &head, &tail, &enable_loop);
+			Assert::IsTrue(enable_loop);
+			Assert::AreEqual(filename, std::string("a.txt"));
+		}
+		TEST_METHOD(NormalTest3)
+		{
+			int argc = 6;
+			char* argv[] = { "base.exe", "-c", "-r", "-h", "a", "a.txt" };
+			base b(argc, argv);
+			std::string filename;
+			int mode;
+			char head, tail;
+			bool enable_loop;
+			b.parse_arguments(&filename, &mode, &head, &tail, &enable_loop);
+			Assert::IsTrue(enable_loop);
+			Assert::AreEqual(filename, std::string("a.txt"));
+			Assert::AreEqual(head, 'a');
+		}
+		TEST_METHOD(NormalTest4)
+		{
+			int argc = 6;
+			char* argv[] = { "base.exe", "-c", "-r", "-t", "a", "a.txt" };
+			base b(argc, argv);
+			std::string filename;
+			int mode;
+			char head, tail;
+			bool enable_loop;
+			b.parse_arguments(&filename, &mode, &head, &tail, &enable_loop);
+			Assert::IsTrue(enable_loop);
+			Assert::AreEqual(filename, std::string("a.txt"));
+			Assert::AreEqual(tail, 'a');
+		}
+		TEST_METHOD(NormalTest5)
+		{
+			int argc = 8;
+			char* argv[] = { "base.exe", "-c", "-r", "-h", "a", "-t", "b", "a.txt" };
+			base b(argc, argv);
+			std::string filename;
+			int mode;
+			char head, tail;
+			bool enable_loop;
+			b.parse_arguments(&filename, &mode, &head, &tail, &enable_loop);
+			Assert::IsTrue(enable_loop);
+			Assert::AreEqual(filename, std::string("a.txt"));
+			Assert::AreEqual(head, 'a');
+			Assert::AreEqual(tail, 'b');
 		}
 
 		TEST_METHOD(ExceptionTest1)
@@ -106,5 +174,7 @@ namespace BaseTest
 			}
 
 		}
+
+	
 	};
 }
