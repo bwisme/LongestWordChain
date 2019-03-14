@@ -167,6 +167,30 @@ namespace CoreTest
 	TEST_CLASS(GetChainCharTest) 
 	{
 	public:
+		TEST_METHOD(Example2)
+		{
+			// test file exist
+
+			char* words[] =
+			{
+				"algebra",
+				"apple",
+				"zoo",
+				"elephant",
+				"under",
+				"fox",
+				"dog",
+				"moon",
+				"leaf",
+				"trick",
+				"pseudopseudohypoparathyroidism"
+			};
+			char* results[100];
+			get_chain_char(words, 11, results, 0, 0, false);
+			Assert::AreEqual(results[0], "pseudopseudohypoparathyroidism");
+			Assert::AreEqual(results[1], "moon");
+
+		}
 		TEST_METHOD(GetChainCharTest5)
 		{
 			// test file exist

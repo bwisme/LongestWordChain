@@ -155,6 +155,8 @@ int base::run()
 	len = core_func(inputs.data(), inputs.size(), outputs, head, tail, enable_loop);
 
 	std::cout << "start output, len is " << len << std::endl;
+	if (len == 0)
+		std::cout << "no valid answer found!" << std::endl;
 	for (int i = 0; i < len; i++)
 	{
 		solution << std::string(outputs[i]) << std::endl;

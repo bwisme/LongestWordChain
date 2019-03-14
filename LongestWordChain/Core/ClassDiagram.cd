@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="core">
+    <Position X="1.5" Y="2" Width="7.25" />
+    <TypeIdentifier>
+      <HashCode>ABgBEAAAgACAQAQQAAiABABEKAAAAAIAAAQQAQBiAgA=</HashCode>
+      <FileName>core_dll.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="word_graph" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="graph">
+    <Position X="9" Y="2" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>CAAAAgIAgIAQCBMAAAAiAACCCIAgAAIAAABAAAKEAgA=</HashCode>
+      <FileName>graph.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="edges" />
+    </ShowAsAssociation>
+  </Class>
+  <Struct Name="edge">
+    <Position X="13.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIBAAAAAAAAAAAAAAgAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>graph.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>
