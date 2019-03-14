@@ -16,7 +16,7 @@ namespace exception_test
 			"fewt"
 		};
 		char* results[100];
-		int len = get_chain_word(words, 3, results, 0, 0, true);
+		int len = gen_chain_word(words, 3, results, 0, 0, true);
 	}
 	void empty_string()
 	{
@@ -27,7 +27,7 @@ namespace exception_test
 			"fewt"
 		};
 		char* results[100];
-		int len = get_chain_word(words, 3, results, 0, 0, false);
+		int len = gen_chain_word(words, 3, results, 0, 0, false);
 	}
 	void not_enough_words()
 	{
@@ -36,7 +36,7 @@ namespace exception_test
 			"a"
 		};
 		char* results[100];
-		int len = get_chain_word(words, 1, results, 0, 0, true);
+		int len = gen_chain_word(words, 1, results, 0, 0, true);
 	}
 	void has_loop()
 	{
@@ -47,7 +47,7 @@ namespace exception_test
 			"fewt"
 		};
 		char* results[100];
-		int len = get_chain_word(words, 3, results, 0, 0, false);
+		int len = gen_chain_word(words, 3, results, 0, 0, false);
 	}
 	void invalid_head()
 	{
@@ -58,7 +58,7 @@ namespace exception_test
 			"fewt"
 		};
 		char* results[100];
-		int len = get_chain_word(words, 3, results, 1, 0, false);
+		int len = gen_chain_word(words, 3, results, 1, 0, false);
 	}
 	void invalid_tail()
 	{
@@ -69,7 +69,7 @@ namespace exception_test
 			"fewt"
 		};
 		char* results[100];
-		int len = get_chain_word(words, 3, results, 0, 1, false);
+		int len = gen_chain_word(words, 3, results, 0, 1, false);
 	}
 }
 
@@ -97,7 +97,7 @@ namespace CoreTest
 				"pseudopseudohypoparathyroidism"
 			};
 			char* results[100];
-			get_chain_word(words, 11, results, 0, 0, false);
+			gen_chain_word(words, 11, results, 0, 0, false);
 			Assert::AreEqual(results[0], "algebra");
 			Assert::AreEqual(results[1], "apple");
 			Assert::AreEqual(results[2], "elephant");
@@ -118,7 +118,7 @@ namespace CoreTest
 
 			};
 			char* results[100];
-			int len = get_chain_word(words, 2, results, 0, 0, false);
+			int len = gen_chain_word(words, 2, results, 0, 0, false);
 			Assert::AreEqual(2, len);
 		}
 		TEST_METHOD(GetChainWordTest6)
@@ -132,7 +132,7 @@ namespace CoreTest
 				"axb"
 			};
 			char* results[100];
-			int len = get_chain_word(words, 3, results, 0, 0, true);
+			int len = gen_chain_word(words, 3, results, 0, 0, true);
 			Assert::AreEqual(2, len);
 		}
 
@@ -153,7 +153,7 @@ namespace CoreTest
 
 			};
 			char* results[100];
-			int len = get_chain_word(words, 9, results, 'a', 'e', false);
+			int len = gen_chain_word(words, 9, results, 'a', 'e', false);
 			Assert::AreEqual(4, len);
 			Assert::AreEqual(results[0], "aab");
 			Assert::AreEqual(results[1], "bbc");
@@ -186,7 +186,7 @@ namespace CoreTest
 				"pseudopseudohypoparathyroidism"
 			};
 			char* results[100];
-			get_chain_char(words, 11, results, 0, 0, false);
+			gen_chain_char(words, 11, results, 0, 0, false);
 			Assert::AreEqual(results[0], "pseudopseudohypoparathyroidism");
 			Assert::AreEqual(results[1], "moon");
 
@@ -203,7 +203,7 @@ namespace CoreTest
 
 			};
 			char* results[100];
-			int len = get_chain_char(words, 3, results, 0, 0, false);
+			int len = gen_chain_char(words, 3, results, 0, 0, false);
 			Assert::AreEqual(2, len);
 			Assert::AreEqual("aab", results[0]);
 			Assert::AreEqual("bdc", results[1]);
@@ -224,7 +224,7 @@ namespace CoreTest
 				"talk"
 			};
 			char* results[100];
-			get_chain_word(words, 5, results, 0, 0, true);
+			gen_chain_word(words, 5, results, 0, 0, true);
 			Assert::AreEqual(results[0], "table");
 			Assert::AreEqual(results[1], "element");
 			Assert::AreEqual(results[2], "teach");
@@ -245,7 +245,7 @@ namespace CoreTest
 				"talk"
 			};
 			char* results[100];
-			get_chain_word(words, 7, results, 0, 0, true);
+			gen_chain_word(words, 7, results, 0, 0, true);
 			Assert::AreEqual(results[0], "table");
 			Assert::AreEqual(results[1], "element");
 			Assert::AreEqual(results[2], "teach");
@@ -274,7 +274,7 @@ namespace CoreTest
 				"qaz"
 			};
 			char* results[100];
-			int len = get_chain_word(words, 14, results, 0, 0, true);
+			int len = gen_chain_word(words, 14, results, 0, 0, true);
 			Assert::AreEqual(11, len);
 
 		}
@@ -304,7 +304,7 @@ namespace CoreTest
 				"qaz"
 			};
 			char* results[100];
-			int len = get_chain_word(words, 14, results, 0, 0, true);
+			int len = gen_chain_word(words, 14, results, 0, 0, true);
 			Assert::AreEqual(11, len);
 			Assert::AreEqual(results[0], "aab");
 			Assert::AreEqual(results[1], "bac");
@@ -331,17 +331,17 @@ namespace CoreTest
 			};
 			char* results[100];
 			int len;
-			len = get_chain_word(words, 4, results, 0, 'z', false);
+			len = gen_chain_word(words, 4, results, 0, 'z', false);
 			Assert::AreEqual(0, len);
-			len = get_chain_char(words, 4, results, 0, 'z', false);
+			len = gen_chain_char(words, 4, results, 0, 'z', false);
 			Assert::AreEqual(0, len);
-			len = get_chain_word(words, 4, results, 'z', 0, false);
+			len = gen_chain_word(words, 4, results, 'z', 0, false);
 			Assert::AreEqual(0, len);
-			len = get_chain_char(words, 4, results, 'z', 0, false);
+			len = gen_chain_char(words, 4, results, 'z', 0, false);
 			Assert::AreEqual(0, len);
-			len = get_chain_word(words, 4, results, 'r', 'z', false);
+			len = gen_chain_word(words, 4, results, 'r', 'z', false);
 			Assert::AreEqual(0, len);
-			len = get_chain_char(words, 4, results, 'r', 'z', false);
+			len = gen_chain_char(words, 4, results, 'r', 'z', false);
 			Assert::AreEqual(0, len);
 
 		}
@@ -362,7 +362,7 @@ namespace CoreTest
 			};
 			char* results[100];
 			int len;
-			len = get_chain_word(words, 8, results, 'a', 'a', true);
+			len = gen_chain_word(words, 8, results, 'a', 'a', true);
 			Assert::AreEqual(3, len);
 
 		}
@@ -380,7 +380,7 @@ namespace CoreTest
 			};
 			char* results[100];
 			int len;
-			len = get_chain_word(words, 6, results, 'a', 'a', true);
+			len = gen_chain_word(words, 6, results, 'a', 'a', true);
 			Assert::AreEqual(0, len);
 
 		}

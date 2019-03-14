@@ -137,17 +137,17 @@ int base::run()
 	core_func_ptr core_func;
 	if (mode == WORD_MODE)
 	{
-		core_func = (core_func_ptr)GetProcAddress(hCoreDLL, "get_chain_word");
+		core_func = (core_func_ptr)GetProcAddress(hCoreDLL, "gen_chain_word");
 		if (!core_func) {
-			std::cout << "could not locate the function: get_chain_word" << std::endl;
+			std::cout << "could not locate the function: gen_chain_word" << std::endl;
 			return EXIT_FAILURE;
 		}
 	}
 	else 
 	{
-		core_func = (core_func_ptr)GetProcAddress(hCoreDLL, "get_chain_char");
+		core_func = (core_func_ptr)GetProcAddress(hCoreDLL, "gen_chain_char");
 		if (!core_func) {
-			std::cout << "could not locate the function: get_chain_char" << std::endl;
+			std::cout << "could not locate the function: gen_chain_char" << std::endl;
 			return EXIT_FAILURE;
 		}
 	}

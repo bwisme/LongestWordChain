@@ -1,4 +1,3 @@
-a
-bc
-d
+abc
+cde
 efghi

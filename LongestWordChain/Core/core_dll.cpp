@@ -217,10 +217,10 @@ int core::common_interface(char* words[], int len, char* result[], char head, ch
 
 
 
-int core::get_chain_word(char* words[], int len, char* result[], char head, char tail, bool enable_loop) {
+int core::gen_chain_word(char* words[], int len, char* result[], char head, char tail, bool enable_loop) {
     return common_interface(words, len, result, head, tail, enable_loop, WORD_MODE);
 }
 
-int core::get_chain_char(char* words[], int len, char* result[], char head, char tail, bool enable_loop) {
+int core::gen_chain_char(char* words[], int len, char* result[], char head, char tail, bool enable_loop) {
     return common_interface(words, len, result, head, tail, enable_loop, CHAR_MODE);
 }

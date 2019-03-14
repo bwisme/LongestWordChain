@@ -15,7 +15,7 @@
 #define WORD_MODE 1
 #define CHAR_MODE 2
 
-typedef int(*core_func_ptr)(char**, int, char**, char, char, bool);
+typedef int(*core_func_ptr)(char* words[], int len, char* result[], char head, char tail, bool enable_loop);
 
 class base
 {
