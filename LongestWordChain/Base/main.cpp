@@ -22,11 +22,16 @@ int main(int argc, char* argv[])
 		return 0;
         
     }
-    catch (const std::exception& e)
+    catch (const cxxopts::OptionException& e)
     {
-        std::cout << e.what() << std::endl;
+		std::cout << "Error parsing options: " << e.what() << std::endl;
 		exit(1);
     }
+	catch (const std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
+		exit(1);
+	}
 
     
 }

@@ -115,7 +115,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>../Base/Debug/base.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>../Base/Debug/base.obj;../Base/Debug/main.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
     </Link>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>

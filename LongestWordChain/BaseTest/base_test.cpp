@@ -290,6 +290,25 @@ namespace BaseTest
 				Assert::AreEqual("parse_arguments: Too much -r appeared", e.what());
 			}
 		}
+		TEST_METHOD(ExceptionTest9)
+		{
+			try
+			{
+				int argc = 3;
+				char* argv[] = { "WordList.exe","-z", "a.txt" };
+				base b(argc, argv);
+				std::string filename;
+				int mode;
+				char head, tail;
+				bool enable_loop;
+				b.parse_arguments(&filename, &mode, &head, &tail, &enable_loop);
+				Assert::Fail();
+			}
+			catch (const std::exception& e)
+			{
+				Assert::AreEqual("Option 'z' does not exist", e.what());
+			}
+		}
 
 	
 	};
