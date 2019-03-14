@@ -18,15 +18,15 @@ graph::graph() {
     topo_result.clear();
 }
 
-graph::~graph() {}
+//graph::~graph() {}
 
 //void graph::init() {
 //
 //}
 
-int graph::char_to_int(char ch) {
-    return ch - 'a';
-}
+//int graph::char_to_int(char ch) {
+//    return ch - 'a';
+//}
 
 void graph::add_edges(int from, int to, int w, char* word){
     if (from == to) {

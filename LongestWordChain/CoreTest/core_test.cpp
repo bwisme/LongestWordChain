@@ -18,6 +18,59 @@ namespace exception_test
 		char* results[100];
 		int len = get_chain_word(words, 3, results, 0, 0, true);
 	}
+	void empty_string()
+	{
+		char* words[] =
+		{
+			"",
+			"avdc",
+			"fewt"
+		};
+		char* results[100];
+		int len = get_chain_word(words, 3, results, 0, 0, false);
+	}
+	void not_enough_words()
+	{
+		char* words[] =
+		{
+			"a"
+		};
+		char* results[100];
+		int len = get_chain_word(words, 1, results, 0, 0, true);
+	}
+	void has_loop()
+	{
+		char* words[] =
+		{
+			"aba",
+			"aca",
+			"fewt"
+		};
+		char* results[100];
+		int len = get_chain_word(words, 3, results, 0, 0, false);
+	}
+	void invalid_head()
+	{
+		char* words[] =
+		{
+			"aba",
+			"avdc",
+			"fewt"
+		};
+		char* results[100];
+		int len = get_chain_word(words, 3, results, 1, 0, false);
+	}
+	void invalid_tail()
+	{
+		char* words[] =
+		{
+			"aa",
+			"avdc",
+			"fewt"
+		};
+		char* results[100];
+		int len = get_chain_word(words, 3, results, 0, 1, false);
+	}
 }
 
 namespace CoreTest
@@ -111,7 +164,27 @@ namespace CoreTest
 
 
 	};
-	TEST_CLASS(GetChainCharTest) {};
+	TEST_CLASS(GetChainCharTest) 
+	{
+	public:
+		TEST_METHOD(GetChainCharTest5)
+		{
+			// test file exist
+
+			char* words[] =
+			{
+				"axxxxxxxxxxxxxxxxxxxc",
+				"aab",
+				"bdc"
+
+			};
+			char* results[100];
+			int len = get_chain_char(words, 3, results, 0, 0, false);
+			Assert::AreEqual(2, len);
+			Assert::AreEqual("aab", results[0]);
+			Assert::AreEqual("bdc", results[1]);
+		}
+	};
 	TEST_CLASS(RingTest) 
 	{
 	public:
@@ -222,7 +295,7 @@ namespace CoreTest
 			Assert::AreEqual(results[10], "kaa");
 		}
 
-		TEST_METHOD(WordsException3)
+		TEST_METHOD(WordsException2)
 		{
 
 			char* words[] =
@@ -249,12 +322,48 @@ namespace CoreTest
 
 		}
 
+		TEST_METHOD(WordsException3)
+		{
+
+			char* words[] =
+			{
+				"aaa",
+				"aba",
+				"aca",
+				"bcd", 
+				"dce", 
+				"edf", 
+				"fog", 
+				"gfo"
+			};
+			char* results[100];
+			int len;
+			len = get_chain_word(words, 8, results, 'a', 'a', true);
+			Assert::AreEqual(3, len);
+
+		}
+		TEST_METHOD(WordsException4)
+		{
+
+			char* words[] =
+			{
+				"aaa",
+				"bcd",
+				"dce",
+				"edf",
+				"fog",
+				"gfo"
+			};
+			char* results[100];
+			int len;
+			len = get_chain_word(words, 6, results, 'a', 'a', true);
+			Assert::AreEqual(0, len);
+
+		}
 
 
 
-
-
-		TEST_METHOD(WordsException2)
+		TEST_METHOD(WordsException5)
 		{
 			Assert::ExpectException<std::invalid_argument>([&] {exception_test::invalid_char_test(); });
 			try
@@ -266,6 +375,67 @@ namespace CoreTest
 				Assert::AreEqual("Core: invalid char in words", e.what());
 			}
 		}
+		TEST_METHOD(WordsException6)
+		{
+			Assert::ExpectException<std::invalid_argument>([&] {exception_test::empty_string(); });
+			try
+			{
+				exception_test::empty_string();
+			}
+			catch (const std::exception& e)
+			{
+				Assert::AreEqual("Core: empty string in words", e.what());
+			}
+		}
+		TEST_METHOD(WordsException7)
+		{
+			Assert::ExpectException<std::invalid_argument>([&] {exception_test::not_enough_words(); });
+			try
+			{
+				exception_test::not_enough_words();
+			}
+			catch (const std::exception& e)
+			{
+				Assert::AreEqual("Core: not enough words", e.what());
+			}
+		}
+		TEST_METHOD(WordsException8)
+		{
+			Assert::ExpectException<std::invalid_argument>([&] {exception_test::has_loop(); });
+			try
+			{
+				exception_test::has_loop();
+			}
+			catch (const std::exception& e)
+			{
+				Assert::AreEqual("Core: loop deteced in words, you need to use -r to parse.", e.what());
+			}
+		}
+		TEST_METHOD(WordsException9)
+		{
+			Assert::ExpectException<std::invalid_argument>([&] {exception_test::invalid_head(); });
+			try
+			{
+				exception_test::invalid_head();
+			}
+			catch (const std::exception& e)
+			{
+				Assert::AreEqual("Core: invalid head or tail", e.what());
+			}
+		}
+		TEST_METHOD(WordsException10)
+		{
+			Assert::ExpectException<std::invalid_argument>([&] {exception_test::invalid_tail(); });
+			try
+			{
+				exception_test::invalid_tail();
+			}
+			catch (const std::exception& e)
+			{
+				Assert::AreEqual("Core: invalid head or tail", e.what());
+			}
+		}
+
 
 
 

@@ -109,7 +109,10 @@ int base::parse_arguments(std::string * filename, int * mode, char * head, char 
 			std::cout << "You seem to input more than one filename, these files would not be parsed" << std::endl;
 		}
         //filename
-        *filename = result["filename"].as<std::string>();
+		if (result.count("filename"))
+			*filename = result["filename"].as<std::string>();
+		else
+			throw std::invalid_argument("parse_arguments: No filename detected");
         return 0;
     }
     catch (const cxxopts::OptionException& e)
@@ -173,6 +176,10 @@ int base::read_file(std::string filename)
         // opened, split words into a vector<string>
         char ch;
         int char_count = 0;
+		if (!file)
+		{
+			throw std::invalid_argument("read_file: File open failed");
+		}
         do 
         {
             ch = fgetc(file);

@@ -56,7 +56,7 @@ public:
 
     bool vis_self_loop[MAX_NODE];
 
-    int char_to_int(char ch);
+    //int char_to_int(char ch);
     
     void search_longest_path(int u, int ans, int tail);
 

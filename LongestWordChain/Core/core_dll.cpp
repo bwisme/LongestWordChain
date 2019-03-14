@@ -119,11 +119,6 @@ int core::get_ans(char* result[], int head, int tail){
 	return cnt;
 }
 
-int core::error(int err_no) {
-    
-    
-    return err_no;
-}
 
 int core::main_func(char* words[], int len, char* result[], char head, char tail, bool enable_loop, int cal_mod) {
     
