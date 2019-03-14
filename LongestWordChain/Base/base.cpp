@@ -14,7 +14,8 @@ base::base(int argc, char** argv)
     // Use cxxopts library for argument parsing, this is a lightweight header file library
     // repo: https://github.com/jarro2783/cxxopts
     //cxxopts::Options options("LongestWordChain", "Find the longest word chain in a text file.");
-    options.add_options()
+	memset(outputs, 0, sizeof(outputs));
+	options.add_options()
         ("w,by-word", "By maximum words")
         ("c,by-char", "By maximum chars")
         ("h,head", "Specify head character", cxxopts::value<char>())

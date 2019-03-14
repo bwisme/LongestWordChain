@@ -151,8 +151,7 @@ int core::main_func(char* words[], int len, char* result[], char head, char tail
     int ans = 0;
     if (!ok) {
         if (enable_loop) {
-            //需要思考的算法
-            //有向有环图求最长简单路径
+
             ans = get_ans_loop(result, char_to_int(head), char_to_int(tail));
         } else {
             //ans = error(HAS_LOOP);

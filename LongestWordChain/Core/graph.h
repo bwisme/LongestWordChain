@@ -28,7 +28,7 @@ public:
 	int path[MAX_EDGE];
 	int path_len;
 
-    int loop_result[MAX_EDGE]; //有环的情况才会用到 一个全局变量，存储的是当前最长路径（边
+    int loop_result[MAX_EDGE]; //有环的情况才会用到 一个全局变量，存储的是当前最长路径\边
     int loop_ans;//有环的情况才会用到 一个全局变量，存储的是当前最长路径的值
 	int loop_len;
 
