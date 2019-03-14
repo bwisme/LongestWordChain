@@ -269,3 +269,4 @@ __pycache__/
 *.iobj
 **/BIN/*.exp
 **/BIN/*.lib
+*.lastcodeanalysissucceeded
