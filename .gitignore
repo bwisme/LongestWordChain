@@ -270,3 +270,4 @@ __pycache__/
 **/BIN/*.exp
 **/BIN/*.lib
 *.lastcodeanalysissucceeded
+**/BIN/*.txt
