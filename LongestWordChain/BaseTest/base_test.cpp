@@ -70,8 +70,8 @@ namespace BaseTest
 		{
 			try
 			{
-				int argc = 2;
-				char* argv[] = { "-w", "-w" };
+				int argc = 4;
+				char* argv[] = { "WordList.exe","-w", "-w", "a.txt"};
 				base b(argc, argv);
 				std::string filename;
 				int mode;
@@ -85,6 +85,25 @@ namespace BaseTest
 				Assert::AreEqual("parse_arguments: Too much -w appeared", e.what());
 			}
 
+		}
+		TEST_METHOD(ExceptionTest2)
+		{
+			try
+			{
+				int argc = 2;
+				char* argv[] = { "WordList.exe","-w" };
+				base b(argc, argv);
+				std::string filename;
+				int mode;
+				char head, tail;
+				bool enable_loop;
+				b.parse_arguments(&filename, &mode, &head, &tail, &enable_loop);
+				Assert::Fail();
+			}
+			catch (const std::invalid_argument& e)
+			{
+				Assert::AreEqual("parse_arguments: Too much -w appeared", e.what());
+			}
 
 		}
 	};
